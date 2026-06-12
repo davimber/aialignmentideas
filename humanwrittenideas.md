@@ -70,6 +70,12 @@ But tone annotations could be another incremental tool in our alignment toolbox.
 ### Removing Duplicate Pathways in Neurons
 -- todo
 
+### Adding Steering Neurons at Deeper or Shallower Locations
+-- todo
+
+### Using Steering Neurons to "Dial Up" a Traight Even Further Than Trained For
+-- todo
+
 
 ### Using Inverting Words as Verifiable Rewards
 
