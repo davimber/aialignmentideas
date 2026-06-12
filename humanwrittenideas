@@ -1,2 +1,6 @@
 RLVR for Honesty
 
+Honesty is an important trait for AI Safety. 
+Training for honesty actually feels easier than some other traits.
+Information can be systematically cut or injected into context deterministically.
+And then honesty can be graded based on known cuts or injection.
