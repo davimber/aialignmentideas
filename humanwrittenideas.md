@@ -50,3 +50,20 @@ But, part of me still suspects I'd like at least some filter or some guard on AI
 Or at least only RL'ed or alignment related concerns.
 A part of the system that's far less likely to have some latent hidden motivations.
 Or overly aggressively seek short term rewards.
+
+### Use Tone of Voice Annotations
+
+The idea here is that tone of voice could be useful for help in aligning AI models.
+And existing text could be annotated with a tone of voice model.
+Essentially every piece of text, generated or source material, could have tone tags attached.
+Or even generate audio files using a TTS model.
+Adding this additional dimension/metadata to every piece of text could allow for greater filtering and detection.
+For example, happiness, deception, fear, and confusion often carry tone signals.
+These could be used in conjuction with thinking tokens to attempt to get a better feeling internal "feelings" of AI models.
+Tone could be used as a filter for pretraining data.
+It could also be used as a filter for outputs. E.g. maybe excessively fearful tone annotated material could be filtered.
+Basically, its a way to take existing text and add a tiny peek into what human emotions often occur in such situations.
+It obviously wouldn't be perfect or nearly complete. There are many thoughts and feelings that never get experessed in tone.
+And the tone annotator could be incorrect, or miss deception sometimes.
+But tone annotations could be another incremental tool in our alignment toolbox.
+
