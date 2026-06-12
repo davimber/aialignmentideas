@@ -4,3 +4,8 @@ Honesty is an important trait for AI Safety.
 Training for honesty actually feels easier than some other traits.
 Information can be systematically cut or injected into context deterministically.
 And then honesty can be graded based on known cuts or injection.
+Also, you can leverage existing datasets during this process.
+So hopefully you can get excellent generalization across diverse settings.
+For example, you can modify context of coding agent trajectories.
+Or just modify general pretraining documents.
+
