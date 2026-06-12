@@ -67,3 +67,31 @@ It obviously wouldn't be perfect or nearly complete. There are many thoughts and
 And the tone annotator could be incorrect, or miss deception sometimes.
 But tone annotations could be another incremental tool in our alignment toolbox.
 
+### Removing Duplicate Pathways in Neurons
+-- todo
+
+
+### Using Inverting Words as Verifiable Rewards
+
+There are many words and phrases that have known logical relationships and functions.
+Some words like "not" or "opposite" can invert the meaning of a piece of text.
+Or in other cases, antonyms can form a similar function.
+We should be able to leverage these logical relationships to develop more deterministically correct training samples.
+And do it at scale by automating the process too.
+I'm not sure the best way to make use of these properties.
+Maybe after developing an alignment reward, you could also invert the reward and invert the wording.
+Thus not only pushing the model toward some things, but also pushing it away from others.
+Or maybe leverage an approach similar to contrastive learning. 
+Where "opposite" samples are pushed apart. 
+And "opposite" samples can easily be generated at scale using inverting words to augment existing data.
+Another idea: maybe steering vectors can be better tuned using these realtionships.
+Or some steering vectors found in a more automated fashion.
+For example, maybe you could sample trajectories with and without inverting words applied to the prompt.
+And the the "difference" in these activations should be your steering vector.
+Any difference captured should be soley attributed to this word flip.
+There are some possible weaknesses to this approach.
+First, many word interactions and relationships aren't perfectly "clean."
+Or may be more complex that the simple logical reduction implies.
+Especially when working with imperfect synonyms, for example.
+Also, signal learned from such inversions and logical relationships may be more brittle or shallow.
+Especially compared to a rich, accurate human-labeled dataset.
