@@ -73,8 +73,23 @@ But tone annotations could be another incremental tool in our alignment toolbox.
 ### Adding Steering Neurons at Deeper or Shallower Locations
 -- todo
 
-### Using Steering Neurons to "Dial Up" a Traight Even Further Than Trained For
--- todo
+### "Dial Up" a Trait Even Further Than Trained For
+It has been shown that you can change model behavior through steering.
+And more simply by prompting for specific behaviors.
+The idea here is to extend a behavioral change even further than seen during training.
+We take a prompt with a numeric value of a trait specified.
+And then train the model to do X amount of that trait.
+For example, for deception, train the model to be X amount deceptive.
+And maybe use an inverted scale so small values correspond to being very deceptive.
+And then, at runtime, you crank this value far beyond ever seen in training.
+The goal then is that the network has learned to generalize this relationship.
+And tries to be even less deceptive than ever seen during training.
+While promising, I think there a couple reason this might fail.
+First, the model might not generalize this relationship well.
+It may learn to interpolate between existing levels of deception.
+But fail to extrapolate to new levels unseen during training.
+Secondly, I imagine this process could result in weird behavior or other unintended downstream effects.
+Finally, having a model capable of extreme deception just laying around could be an added risk.
 
 
 ### Using Inverting Words as Verifiable Rewards
