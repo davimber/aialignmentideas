@@ -71,7 +71,22 @@ But tone annotations could be another incremental tool in our alignment toolbox.
 -- todo
 
 ### Adding Steering Neurons at Deeper or Shallower Locations
--- todo
+We have the ability to inject information into a neuron at different locations throughout the network.
+For example, we could manually make a certain activation value really large if we wanted a model to rhyme.
+And then train the model, so it checks this neuron value to see if the response should rhyme.
+If this neuron is deep in the network, the network is likely forced to develop multiple possible responses earlier in the network.
+And then choose between them based on the neuron value.
+Simply because there is insufficient depth to fully craft a response afterward.
+I'm not exactly sure what this capability would be useful for, but it feels like there might be some creative ideas to try.
+First you know the model is coniditioning on these values.
+Maybe that could make a subregion of the network more interpretable.
+You could include many such neurons with a variety of conditions that might make a region even more interpretable.
+Second you might be able to use the knowledge that the model is thinking about multiple responses.
+Maybe even test for "how many things can the model think about simulteanously."
+Anyway, it feels like the use case for this isn't immediately clear cut.
+The idea needs more development, but I'll leave it here for reference.
+
+
 
 ### "Dial Up" a Trait Even Further Than Trained For
 It has been shown that you can change model behavior through steering.
