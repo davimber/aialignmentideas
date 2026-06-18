@@ -131,3 +131,18 @@ Or may be more complex that the simple logical reduction implies.
 Especially when working with imperfect synonyms, for example.
 Also, signal learned from such inversions and logical relationships may be more brittle or shallow.
 Especially compared to a rich, accurate human-labeled dataset.
+
+### Learn Preference Models for Certain Personalities
+
+Some people have massive amounts of content of them on the internet.
+And if the appropriate rights and their permission could be gathered, you might be able to tune a model to their responses.
+And if their biases and tendencies were well understood, this might be useful for alignment.
+The model of them could be used as a monitor.
+Or as a grader.
+If it was someone very smart and well respected, and we could sufficiently model their responses, there could be utility there.
+If someone, or even a character from a show, was a very bad person, there might still be usefulness as an inverted reward signal.
+Hopefully, by narrowing the scope of roles the model has to play, it could be better at indidual roles.
+And be more robust/less prone to role-based jailbreaks.
+There are definite possible failure modes to this technique though.
+Most obviously, the AI might insufficiently model the person's responses.
+Also, getting utility without unwanted biases leaking into the final model might be more difficult.
