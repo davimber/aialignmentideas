@@ -146,3 +146,38 @@ And be more robust/less prone to role-based jailbreaks.
 There are definite possible failure modes to this technique though.
 Most obviously, the AI might insufficiently model the person's responses.
 Also, getting utility without unwanted biases leaking into the final model might be more difficult.
+
+
+### English Language Autoencoders on Subset of Activations
+
+Neural networks are famously hard to interpret, LLM's especially so.
+This idea is to use a encoder-decoder model on part of the activations.
+Hopefully, the encoded state will be more interpretable.
+The core approach is to force the encoding into English language.
+English is fairly powerful for data compression.
+And readily interpretable by humans (assuming its well-written).
+The idea is to powerfully compress "thoughts" the network is having into English.
+The encoder tries to take the incoming activations and encode into language what is happening.
+The decoder then is tasked with reproducing the output given just the language.
+If the section of network the autoencoder is trying to model is large, the amount of language needed to encode successfully might be quite large.
+I suspect a gentle length penalty would be needed.
+And also a powerful encoder would be needed. 
+Language is famounsly challenging to model -- there's a reason we need such large LLM's today.
+Also, there may need to be a judge model adding a reward for readability.
+Otherwise the encoder may just learn some complicated mapping that uses words, but doesn't look like nice interpretable sentences.
+I think the upsides here are quite tremendous if the approach is effective.
+The reward signal for this encoder-decoder is available at massive scale.
+(You can train the component over massive pretraining datasets, RL runs, etc).
+However, getting it to actually train well is likely tricky.
+A concept of compression ratio might be helpful to figure out a science of how much language can compress how much of the nerual network.
+Too little language with too many activations likely just won't reconstruct well.
+The approach could be extended to multilayer chunks of a neural net too.
+The language would then need to encode not just the activations, but the interactions in the encoded layers.
+I think some science of what parts, depths, sizes of the network to try to compress would be needed.
+Another potential downside is the cost and complexity.
+To get good English and reconstruction, a lot of compute might be needed at inference time.
+If it's run per token and the encoder-decoder is large, the cost could be significant.
+Not to mention, the encoding would then likely need to be run through a separate classifier.
+However, maybe this encoder-decoder is still a small fraction of the size of the full LLM and thus not a huge deal.
+Finally, I think there are a number of fun ways you could extend the idea.
+For example, the encoded state could be images or audio.
