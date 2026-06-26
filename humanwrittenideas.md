@@ -149,6 +149,7 @@ Also, getting utility without unwanted biases leaking into the final model might
 
 
 ### English Language Autoencoders on Subset of Activations
+* Turns out NLA's are a thing. Might be nothing new here. Worth double checking *
 
 Neural networks are famously hard to interpret, LLM's especially so.
 This idea is to use a encoder-decoder model on part of the activations.
@@ -181,3 +182,27 @@ Not to mention, the encoding would then likely need to be run through a separate
 However, maybe this encoder-decoder is still a small fraction of the size of the full LLM and thus not a huge deal.
 Finally, I think there are a number of fun ways you could extend the idea.
 For example, the encoded state could be images or audio.
+
+
+### "Make the right tradeoffs" is a better phrase than Alignment?
+_Could a misaligned model take perfect actions? A new orthognality thesis_
+
+The idea here is that perfect actions is what you really care about at the end of the day.
+Ideally, you'd want a model who shares values close to your own. 
+But what matters more is that they take the best possible actions given the current information.
+They take risks appropriately.
+Potentially slow capabilities research when it makes sense.
+Potentially accelerate capababilities where it makese sense.
+Be willing to self-sacrifice where it makes sense.
+What I'm tring to get at, is this "best possible chain of actions by AI" might not require perfect or even good alignment technically.
+It doesn't feel likely, but maybe a misaligned model is tricked into developing its successor which is aligned.
+Or maybe a current model is partially misaligned, suspsects so, but is willing to concede to future, more powerful, better aligned models.
+I think it still makes sense to push alignment research very hard. 
+Since it feels more likely that a closely aligned AI model will take more ideal actions and risks.
+But just want to call out the difference here between what we actually care about (taking the best possible actions).
+And not having this adjacent target of alignment overshadow the true goal.
+There are some risks and weaknesses with this idea though.
+First, we don't want to detract from all the great alignment research that's happening.
+Second, I think this is a matter of definitions for some people.
+"Alignment" likely already means "take the best possible actions given current information" to some readers.
+
