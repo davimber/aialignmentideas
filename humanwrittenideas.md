@@ -206,3 +206,47 @@ First, we don't want to detract from all the great alignment research that's hap
 Second, I think this is a matter of definitions for some people.
 "Alignment" likely already means "take the best possible actions given current information" to some readers.
 
+### Replace Every Part of the Network with Language
+
+This idea extends the concept of natural language autoencoders.
+The core idea is to replace parts of a neural network with language.
+This could be activations from a single layer. 
+Or even replace multiple layers at a time.
+In other words, the encoder should be able to take an earlier layers activations.
+Compress it to tokens, and then rectonstruct activations from a later layer.
+There are a few reasons why this idea is attractive.
+First, language is often more auditable than a large matrix of activations.
+If we can literally read out a models thoughts step by step, that would have huge implications for safety.
+Second, language is a pretty solid compressor, and language models are good at writing and compressing language.
+So there is some hope that compressing thoughts, or even whole ciruits could be done with language.
+The original language model can do it pretty well, after all.
+Third, you have near infinite training data with a perfect reward signal.
+We have the ability to keep varing the input, and rewarding the autoencoder for better and better reconstructions.
+Obviously there is some risk the autoencoder learns some mapping or representation that isn't interpretable English.
+For example, with a sufficiently large number of generated tokens, the decoder could just learn a 1:1 map to the output values.
+However, a length penalty or various approaches to encourage shorter encodings could hopefully solve this.
+Fourth, the approach leverages data and compute. Its very bitter lesson pilled.
+Language models have a massive number of circuits and rediculous complexity.
+And they are trained to compress/overlay/reuse that complexity.
+The nice part here is we leverage massive data and compute to model that complexity.
+I know personally, converting thoughts to English is sometimes hard. 
+And requires quite a bit of thinking to compress my mental flow well.
+While a weak analogy, I suspect coverting LLM thoughts to nice understandable English will also require lots of compute.
+Fifth, there are some ways to help check the autoencoded English is robust and isn't a dumb mapping table.
+You can obviously take a look at the size of the activations and compare that to the number of tokens to get a compression ratio.
+You can also swap synonyms or rewrite the thoughts with identical meaning and check for identical output.
+While it isn't surefire evidence the English corresponds to the model's actual thinking, a strong compression ratio plus robustness to rewrites is decent evidence.
+And on top of that you, can do fun permutations/tinkering with those thoughts and see how it affects output.
+For example, injecting other information.
+Or changing a detail.
+If multi-layer autoencoders worked, you could also do some fun experiments seeing whether activation explainations from individual layers add up to the multi-layer explanation.
+If it worked well across many layers of the network, exploring thoughts at each level could help reveal the progression of a model's thinking.
+Understanding what layer 1 did versus layer 9 could be quite interesting.
+All this being said, I think its worth hilighting some real challenges to make this work.
+First, parts of the network may contain a very large amount of information and processing and be quite incompressible. 
+Its possible you would need a massive amount of language to accurately compress whats happening.
+And training the encoder to write that much English, that reads well, could be difficult.
+Second, while there are methods to encourage and help test for faithfulness, the tokens might not have the exact meaning we think they do.
+Finally, explaining lots of dense, detailed thoughts from a big model, might require a big model.
+And lots of tokens just to explain one token. So running all the time might be expensive.
+
