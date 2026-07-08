@@ -212,12 +212,12 @@ This idea extends the concept of natural language autoencoders.
 The core idea is to replace parts of a neural network with language.
 This could be activations from a single layer. 
 Or even replace multiple layers at a time.
-In other words, the encoder should be able to take an earlier layers activations, compress it to tokens, and then rectonstruct activations from a later layer.
+In other words, the encoder should be able to take an earlier layers' activations, compress it to tokens, and then rectonstruct activations from a later layer.
 
 
 There are a few reasons why this idea is attractive.
 First, language is often more auditable than a large matrix of activations.
-If we can literally read out a models thoughts step by step, that would have huge implications for safety.
+If we can literally read out a model's thoughts step by step, that would have huge implications for safety.
 Second, language is a pretty solid compressor, and language models are good at writing and compressing language.
 So there is some hope that compressing thoughts, or even whole ciruits could be done with language.
 The original language model can do it pretty well, after all.
@@ -226,7 +226,7 @@ We have the ability to keep varing the input, and rewarding the autoencoder for 
 Obviously there is some risk the autoencoder learns some mapping or representation that isn't interpretable English.
 For example, with a sufficiently large number of generated tokens, the decoder could just learn a 1:1 map to the output values.
 However, a length penalty or various approaches to encourage shorter encodings could hopefully solve this.
-Fourth, the approach leverages data and compute. Its very bitter lesson pilled.
+Fourth, the approach leverages data and compute. It's very bitter lesson pilled.
 Language models have a massive number of circuits and rediculous complexity.
 And they are trained to compress/overlay/reuse that complexity.
 The nice part here is we leverage massive data and compute to model that complexity.
@@ -245,11 +245,11 @@ If it worked well across many layers of the network, exploring thoughts at each 
 Understanding what layer 1 did versus layer 9 could be quite interesting.
 
 
-All this being said, I think its worth hilighting some real challenges to make this work.
+All this being said, I think it's worth highlighting some real challenges to make this work.
 First, parts of the network may contain a very large amount of information and processing and be quite incompressible. 
 Its possible you would need a massive amount of language to accurately compress whats happening.
 And training the encoder to write that much English, that reads well, could be difficult.
 Second, while there are methods to encourage and help test for faithfulness, the tokens might not have the exact meaning we think they do.
 Finally, explaining lots of dense, detailed thoughts from a big model, might require a big model.
-And lots of tokens just to explain one token. So running all the time might be expensive.
+And lots of tokens just to explain one token. So running this all the time might be expensive.
 
