@@ -212,8 +212,9 @@ This idea extends the concept of natural language autoencoders.
 The core idea is to replace parts of a neural network with language.
 This could be activations from a single layer. 
 Or even replace multiple layers at a time.
-In other words, the encoder should be able to take an earlier layers activations.
-Compress it to tokens, and then rectonstruct activations from a later layer.
+In other words, the encoder should be able to take an earlier layers activations, compress it to tokens, and then rectonstruct activations from a later layer.
+
+
 There are a few reasons why this idea is attractive.
 First, language is often more auditable than a large matrix of activations.
 If we can literally read out a models thoughts step by step, that would have huge implications for safety.
@@ -242,6 +243,8 @@ Or changing a detail.
 If multi-layer autoencoders worked, you could also do some fun experiments seeing whether activation explainations from individual layers add up to the multi-layer explanation.
 If it worked well across many layers of the network, exploring thoughts at each level could help reveal the progression of a model's thinking.
 Understanding what layer 1 did versus layer 9 could be quite interesting.
+
+
 All this being said, I think its worth hilighting some real challenges to make this work.
 First, parts of the network may contain a very large amount of information and processing and be quite incompressible. 
 Its possible you would need a massive amount of language to accurately compress whats happening.
