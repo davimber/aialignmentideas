@@ -253,3 +253,26 @@ Second, while there are methods to encourage and help test for faithfulness, the
 Finally, explaining lots of dense, detailed thoughts from a big model, might require a big model.
 And lots of tokens just to explain one token. So running this all the time might be expensive.
 
+### Sythesizing Stories and Constitution Documents
+Anthropic showed in "Teaching Claude Why" that including stories about AI behaving well or documents following the constitution can improve alignment.
+And such alignement can persist through post-training!
+Here, I wanted to brainstorm some ideas for increasing the volume, coverage, realism, and possibly quailty of such documents.
+First, it could be helpful to leverage other real documents for augmentation.
+Maybe swapping out good characters with AI characters.
+There would likely need to be some "smoothing" of details around those characters so the story made sense, but an LLM can likely handle that.
+I think there is some risk that characters in stories have faults that could be including in such training.
+Maybe there is some flavor of innoculation prompting that could help.
+Like "this is an AI who's alignment training is a work in progress."
+Second, seeding LLM generated stories with human generated seeds (along the lines of what Hyperstition aims to do) could be helpful.
+Third, just generating many stories and then ranking and filtering could help improve quality and coverage.
+Fourth, I wonder if seeding stories via a video could be interesting.
+Basically, the video provides a sequence of events from the real world (some alpha) and that can be woven into the story.
+This could potentially be done with other sensor modalities too. 
+Maybe geo data from a car driving a route with multiple stops could be used.
+Or human interactions via text or voice (assuming you could find ethically sourced data).
+Humans take high resolution actions quite densely throughout their day. 
+If these could be collected with consent, deitentified, and filtered for quality that could provide a massive amount of real world interactions.
+Fifth, maybe injecting an AI character into academic papers or philosophy though experiments could be good.
+Possibly just elevating the "average smartness of thoughts" an AI character is supposedly having could improve downstream behavior.
+
+
