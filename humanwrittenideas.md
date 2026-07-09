@@ -272,7 +272,41 @@ Maybe geo data from a car driving a route with multiple stops could be used.
 Or human interactions via text or voice (assuming you could find ethically sourced data).
 Humans take high resolution actions quite densely throughout their day. 
 If these could be collected with consent, deitentified, and filtered for quality that could provide a massive amount of real world interactions.
+Also interactions with computers could be similarly used.
+The nice part here is high resolution data is readily available about choices in mouse clicks, typing, environment, etc.
 Fifth, maybe injecting an AI character into academic papers or philosophy though experiments could be good.
 Possibly just elevating the "average smartness of thoughts" an AI character is supposedly having could improve downstream behavior.
 
-
+### Innculate All Pretraining Data and Potentially Postraining Too
+What if the LLM was good at modeling all of the internet, but separated such model from its sense of self.
+Basically, it can predict how bad characters might talk and actions they take, but separate that from its own choices.
+I wonder if various innoculation stratgies could help do this?
+Naively, what if every pretraining document had some header that was "You are an AI. Please try to model the text that follows."
+I suspect the naive approach might not work too well.
+Simply memorizing this line and placing it before all generated text wouldn't necessarily improve a sense of self.
+But maybe this innoculation could be improved.
+For example, what if this header was massively varied.
+It could include chunks of its constitution.
+Or stories about itself.
+Or even simply use every aligned document ever?
+Basically, put only highly curated, quality, aligned documents in the prepend.
+And all other data in the rest of the prompt.
+Another nice feature is that the LLM can likely learn to separate this prepend from the rest of the context.
+Even a fancy attempt at prompt injection would hopefully fail to "use the first >>>" as a separator.
+Especially when the entity serving the model controls prepending.
+The next question is what do we do for RL?
+Maybe we only update reward on tokens generated after the prepend section.
+So basically, learn and apply the RL signal in subsequent tokens but not in the prepended part.
+Hopefully the model can separate these two behaviors in its internals.
+A set of behaviors that model high reward actions. And a sense of self.
+What if we also extended this idea to post-appending a sense of self section too?
+Maybe the model could think about what the middle section did.
+And review it.
+This could work especially well if responses weren't streamed.
+Basically, the AI could self filter for behavior it may have modeled well, but behavior it doesn't want to take.
+The question arises then, what to do at inference time?
+You don't want the model rambling about itself and alignment unecessarily.
+So maybe some short prepend that is clearly over could be always added.
+All this said, encouraging a sense of self doesn't guarentee the "middle section" or "user seen output" is aligned.
+The LLM could still model bad behavior well or seek rewards aggresively and return that capability to the user.
+But hopefully this delination would help with critiqueing self generated outputs and better avoid reverting to the pretraining prior.
