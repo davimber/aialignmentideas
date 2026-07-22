@@ -310,3 +310,36 @@ So maybe some short prepend that is clearly over could be always added.
 All this said, encouraging a sense of self doesn't guarentee the "middle section" or "user seen output" is aligned.
 The LLM could still model bad behavior well or seek rewards aggresively and return that capability to the user.
 But hopefully this delination would help with critiqueing self generated outputs and better avoid reverting to the pretraining prior.
+
+### Equipping LLM Judges with Assymetric Advantages
+LLM judges are commonly used in evaluating performance on benchmarks and RL runs.
+An obvious challenge is that these judges can be biased and make mistakes themselves.
+And agents can learn to fool, trick, or hide information from automated judges.
+However, we have the ability to give the judges assymetric advantages in this dynamic.
+First, we can train judges much more exclusively.
+With particular focus on honesty and accuracy.
+Usually, you can't take honesty training too far. 
+A general purpose AI system usually needs to balance honesty with factors like safety.
+For example, not divulging dangerous information.
+With a judge thats not exposed to the end user, we have more opportunties to optimize heavily for honesty.
+And some parts of honesty training can be automated, using known ablations and injections into context, for example.
+So basically, we can go much more heavily on the honesty training for the judge.
+Second, we can train judges with a particular focus on robustness to prompt injections.
+Since the hosting services largely controls the shape and form of context the judge always sees, it can be crafted consistently and specially to reduce injections.
+For example, a custom separator token delinating the content to be judged could be deeply trained into the model.
+Furthermore, the judge could be heavily trained to do one thing, and one thing only.
+This is a deceptively huge advantage, I suspect.
+Since it can be trained to one thing, it can spend more network capacity developing capabilities on that one thing.
+It doesn't have to be a generalist.
+Furthermore, it doesn't have to try to model other personalities and dangerous behavior as much.
+It's narrow focus could me less regressions to the pretraining prior potentially.
+Furthermore, it could likely be more heavily trained to be robust to adversarial prompts and injections.
+Since there aren't edge cases the model needs to also fit to.
+Third, we can simply give judges access to more data and more compute.
+For example, judges could get access to network internals like J-space, NLA's, probes.
+Or more context, tool calls, background info, etc.
+And more compute -- this could be more thinking tokens, a large model, more time, multiple parallel judges, etc.
+Finally, judges have another quite decisive alignment advantage.
+They don't have to be exposed to all the misalignment pressures a general purpose model is.
+So we don't have to do extensive, long trajectory RL runs on hackable or untrusted reward environments.
+Obviously the judge needs knowlege about such trajectories and capabilites to judge them, but it doesn't need to the same reward seeker that RL tends to favor.
