@@ -206,6 +206,22 @@ First, we don't want to detract from all the great alignment research that's hap
 Second, I think this is a matter of definitions for some people.
 "Alignment" likely already means "take the best possible actions given current information" to some readers.
 
+### Developing Games that Favor Transparency and Collaboration
+
+This is probably a lower-value idea and may be hard to implement, but here is goes.
+The approach is to develop collaborative games that favor desireable characteristics like honesty.
+And make the games varied/general enough that the learned characteristics transfer to real world use.
+This is a tall order.
+But maybe we could start simple.
+For example, a game could be two agents working together.
+They are each given information the other doesn't have.
+And the ability to take actions the other can't.
+The sequence of actions to get a reward requires sharing information and coordinating actions.
+Maybe one agent must take two succcessive actions, then the other take three, and then reward is given iff this occurs.
+While this game might encourage helpfulness and honesty, it doesn't necessarily encourage harmlessness.
+So, there might need to be options in the game the agents need to steer away from to get points.
+
+
 ### Replace Every Part of the Network with Language
 
 This idea extends the concept of natural language autoencoders.
@@ -337,8 +353,11 @@ Furthermore, it could likely be more heavily trained to be robust to adversarial
 Since there aren't edge cases the model needs to also fit to.
 Third, we can simply give judges access to more data and more compute.
 For example, judges could get access to network internals like J-space, NLA's, probes.
+(Though be extra careful of training against signals like this).
 Or more context, tool calls, background info, etc.
 And more compute -- this could be more thinking tokens, a large model, more time, multiple parallel judges, etc.
+Also, judges can be used in both training and deployment of other models.
+A good judge can evaluate RL trajectories, and also be used at runtime as a guard or filter.
 Finally, judges have another quite decisive alignment advantage.
 They don't have to be exposed to all the misalignment pressures a general purpose model is.
 So we don't have to do extensive, long trajectory RL runs on hackable or untrusted reward environments.
