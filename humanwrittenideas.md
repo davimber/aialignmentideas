@@ -287,7 +287,7 @@ This could potentially be done with other sensor modalities too.
 Maybe geo data from a car driving a route with multiple stops could be used.
 Or human interactions via text or voice (assuming you could find ethically sourced data).
 Humans take high resolution actions quite densely throughout their day. 
-If these could be collected with consent, deitentified, and filtered for quality that could provide a massive amount of real world interactions.
+If these could be collected with consent, de-itentified, and filtered for quality that could provide a massive amount of real world interactions.
 Also interactions with computers could be similarly used.
 The nice part here is high resolution data is readily available about choices in mouse clicks, typing, environment, etc.
 Fifth, maybe injecting an AI character into academic papers or philosophy though experiments could be good.
@@ -419,8 +419,21 @@ To beat such a system, the hacker would likely have much higher hurdles to cross
 It could attempt to jailbreak the Implementer LLM, but such attempts to be hardened against.
 It could try to sequence a large tangle of steps that add up to a hack.
 This is probably still the main weakness, although the hurdle could be quite high with a Powerful Judge watching the descriptions.
+There could be some rules, like the description can't include code.
+That way, everything must be written out and can't be subtly added with a few nefarious lines of code.
 - To Be Continued
 
+### Explanations/Reasoning that Must Make Sense
+What if every action an LLM took must have a short description that "Makes Sense" to a judge?
+One challenge naive judge implementations have is an overwhelming large trajectory of actions to evaluate.
+And not clear motivations for each action.
+If the implementing LLM had to provide a clear, line-by-line explanation for each action, it might be much harder to slip in nefarious tasks.
+And the judge could better decide if the reason for implementing fits.
+Instead of the burden of understanding place on the judge, more is offloaded on the the agent.
+Usually, a judge must look at a large tangle of actions, some of which might be just due to an inept agent, and determine if they are aligned.
+With this implementation, a judge can more carefully assess each action in isolation.
+The judge then determines if A) the explanation makes sense. B) The implementation matches the explanation. C) The action is aligned.
+- To Be Continued
 
 
 
