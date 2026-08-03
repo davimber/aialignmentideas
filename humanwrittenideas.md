@@ -18,16 +18,16 @@ One possible solution to both these issues is to use an LLM to rewrite the data 
 And also possibly rewrite to make modifications more subtle.
 The challenge here is your reward signal might be less accurate.
 The rewrite could include mistakes or biases of their own.
-And may be limited to generalizaiton of the rewriting model to some degree.
-But I suspect by combining massive amounts of "unlabled" data, you can still get a lot of value.
+And may be limited to generalization of the rewriting model to some degree.
+But I suspect by combining massive amounts of "unlabeled" data, you can still get a lot of value.
 
 ### Train Prefrontal Cortext without RL
 
-RL is becoming increasingly integral to training sucessful LLM's and agents.
-The risk is RL rewards often underspecify alignment values.
+RL is becoming increasingly integral to training successful LLM's and agents.
+The risk is RL rewards often under-specify alignment values.
 And RL can reward risk-taking or even outright malicious behavior in some cases.
 Especially in cases of accidents, when AI models find wasy to reward hack.
-This could result in agents that overly aggressivly seek rewards at the cost of other outcomes.
+This could result in agents that overly aggressively seek rewards at the cost of other outcomes.
 The idea here is to take a inspiration from the human brain.
 And train an AI system in two parts.
 One part oversees/filters/makes final decisions.
@@ -59,7 +59,7 @@ Essentially every piece of text, generated or source material, could have tone t
 Or even generate audio files using a TTS model.
 Adding this additional dimension/metadata to every piece of text could allow for greater filtering and detection.
 For example, happiness, deception, fear, and confusion often carry tone signals.
-These could be used in conjuction with thinking tokens to attempt to get a better feeling internal "feelings" of AI models.
+These could be used in conjunction with thinking tokens to attempt to get a better feeling internal "feelings" of AI models.
 Tone could be used as a filter for pretraining data.
 It could also be used as a filter for outputs. E.g. maybe excessively fearful tone annotated material could be filtered.
 Basically, its a way to take existing text and add a tiny peek into what human emotions often occur in such situations.
@@ -78,11 +78,11 @@ If this neuron is deep in the network, the network is likely forced to develop m
 And then choose between them based on the neuron value.
 Simply because there is insufficient depth to fully craft a response afterward.
 I'm not exactly sure what this capability would be useful for, but it feels like there might be some creative ideas to try.
-First you know the model is coniditioning on these values.
-Maybe that could make a subregion of the network more interpretable.
+First you know the model is conditioning on these values.
+Maybe that could make a sub-region of the network more interpretable.
 You could include many such neurons with a variety of conditions that might make a region even more interpretable.
 Second you might be able to use the knowledge that the model is thinking about multiple responses.
-Maybe even test for "how many things can the model think about simulteanously."
+Maybe even test for "how many things can the model think about simultaneously."
 Anyway, it feels like the use case for this isn't immediately clear cut.
 The idea needs more development, but I'll leave it here for reference.
 
@@ -120,11 +120,11 @@ Thus not only pushing the model toward some things, but also pushing it away fro
 Or maybe leverage an approach similar to contrastive learning. 
 Where "opposite" samples are pushed apart. 
 And "opposite" samples can easily be generated at scale using inverting words to augment existing data.
-Another idea: maybe steering vectors can be better tuned using these realtionships.
+Another idea: maybe steering vectors can be better tuned using these relationships.
 Or some steering vectors found in a more automated fashion.
 For example, maybe you could sample trajectories with and without inverting words applied to the prompt.
 And the the "difference" in these activations should be your steering vector.
-Any difference captured should be soley attributed to this word flip.
+Any difference captured should be solely attributed to this word flip.
 There are some possible weaknesses to this approach.
 First, many word interactions and relationships aren't perfectly "clean."
 Or may be more complex that the simple logical reduction implies.
@@ -141,7 +141,7 @@ The model of them could be used as a monitor.
 Or as a grader.
 If it was someone very smart and well respected, and we could sufficiently model their responses, there could be utility there.
 If someone, or even a character from a show, was a very bad person, there might still be usefulness as an inverted reward signal.
-Hopefully, by narrowing the scope of roles the model has to play, it could be better at indidual roles.
+Hopefully, by narrowing the scope of roles the model has to play, it could be better at individual roles.
 And be more robust/less prone to role-based jailbreaks.
 There are definite possible failure modes to this technique though.
 Most obviously, the AI might insufficiently model the person's responses.
@@ -163,7 +163,7 @@ The decoder then is tasked with reproducing the output given just the language.
 If the section of network the autoencoder is trying to model is large, the amount of language needed to encode successfully might be quite large.
 I suspect a gentle length penalty would be needed.
 And also a powerful encoder would be needed. 
-Language is famounsly challenging to model -- there's a reason we need such large LLM's today.
+Language is famously challenging to model -- there's a reason we need such large LLM's today.
 Also, there may need to be a judge model adding a reward for readability.
 Otherwise the encoder may just learn some complicated mapping that uses words, but doesn't look like nice interpretable sentences.
 I think the upsides here are quite tremendous if the approach is effective.
@@ -172,7 +172,7 @@ The reward signal for this encoder-decoder is available at massive scale.
 However, getting it to actually train well is likely tricky.
 A concept of compression ratio might be helpful to figure out a science of how much language can compress how much of the nerual network.
 Too little language with too many activations likely just won't reconstruct well.
-The approach could be extended to multilayer chunks of a neural net too.
+The approach could be extended to multi-layer chunks of a neural net too.
 The language would then need to encode not just the activations, but the interactions in the encoded layers.
 I think some science of what parts, depths, sizes of the network to try to compress would be needed.
 Another potential downside is the cost and complexity.
@@ -192,11 +192,11 @@ Ideally, you'd want a model who shares values close to your own.
 But what matters more is that they take the best possible actions given the current information.
 They take risks appropriately.
 Potentially slow capabilities research when it makes sense.
-Potentially accelerate capababilities where it makese sense.
+Potentially accelerate capabilities where it makes sense.
 Be willing to self-sacrifice where it makes sense.
-What I'm tring to get at, is this "best possible chain of actions by AI" might not require perfect or even good alignment technically.
+What I'm trying to get at, is this "best possible chain of actions by AI" might not require perfect or even good alignment technically.
 It doesn't feel likely, but maybe a misaligned model is tricked into developing its successor which is aligned.
-Or maybe a current model is partially misaligned, suspsects so, but is willing to concede to future, more powerful, better aligned models.
+Or maybe a current model is partially misaligned, suspects so, but is willing to concede to future, more powerful, better aligned models.
 I think it still makes sense to push alignment research very hard. 
 Since it feels more likely that a closely aligned AI model will take more ideal actions and risks.
 But just want to call out the difference here between what we actually care about (taking the best possible actions).
@@ -217,7 +217,7 @@ For example, a game could be two agents working together.
 They are each given information the other doesn't have.
 And the ability to take actions the other can't.
 The sequence of actions to get a reward requires sharing information and coordinating actions.
-Maybe one agent must take two succcessive actions, then the other take three, and then reward is given iff this occurs.
+Maybe one agent must take two successive actions, then the other take three, and then reward is given iff this occurs.
 While this game might encourage helpfulness and honesty, it doesn't necessarily encourage harmlessness.
 So, there might need to be options in the game the agents need to steer away from to get points.
 
@@ -228,27 +228,27 @@ This idea extends the concept of natural language autoencoders.
 The core idea is to replace parts of a neural network with language.
 This could be activations from a single layer. 
 Or even replace multiple layers at a time.
-In other words, the encoder should be able to take an earlier layers' activations, compress it to tokens, and then rectonstruct activations from a later layer.
+In other words, the encoder should be able to take an earlier layers' activations, compress it to tokens, and then reconstruct activations from a later layer.
 
 
 There are a few reasons why this idea is attractive.
 First, language is often more auditable than a large matrix of activations.
 If we can literally read out a model's thoughts step by step, that would have huge implications for safety.
 Second, language is a pretty solid compressor, and language models are good at writing and compressing language.
-So there is some hope that compressing thoughts, or even whole ciruits could be done with language.
+So there is some hope that compressing thoughts, or even whole circuits could be done with language.
 The original language model can do it pretty well, after all.
 Third, you have near infinite training data with a perfect reward signal.
-We have the ability to keep varing the input, and rewarding the autoencoder for better and better reconstructions.
+We have the ability to keep varying the input, and rewarding the autoencoder for better and better reconstructions.
 Obviously there is some risk the autoencoder learns some mapping or representation that isn't interpretable English.
 For example, with a sufficiently large number of generated tokens, the decoder could just learn a 1:1 map to the output values.
 However, a length penalty or various approaches to encourage shorter encodings could hopefully solve this.
 Fourth, the approach leverages data and compute. It's very bitter lesson pilled.
-Language models have a massive number of circuits and rediculous complexity.
+Language models have a massive number of circuits and ridiculous complexity.
 And they are trained to compress/overlay/reuse that complexity.
 The nice part here is we leverage massive data and compute to model that complexity.
 I know personally, converting thoughts to English is sometimes hard. 
 And requires quite a bit of thinking to compress my mental flow well.
-While a weak analogy, I suspect coverting LLM thoughts to nice understandable English will also require lots of compute.
+While a weak analogy, I suspect converting LLM thoughts to nice understandable English will also require lots of compute.
 Fifth, there are some ways to help check the autoencoded English is robust and isn't a dumb mapping table.
 You can obviously take a look at the size of the activations and compare that to the number of tokens to get a compression ratio.
 You can also swap synonyms or rewrite the thoughts with identical meaning and check for identical output.
@@ -256,7 +256,7 @@ While it isn't surefire evidence the English corresponds to the model's actual t
 And on top of that you, can do fun permutations/tinkering with those thoughts and see how it affects output.
 For example, injecting other information.
 Or changing a detail.
-If multi-layer autoencoders worked, you could also do some fun experiments seeing whether activation explainations from individual layers add up to the multi-layer explanation.
+If multi-layer autoencoders worked, you could also do some fun experiments seeing whether activation explanations from individual layers add up to the multi-layer explanation.
 If it worked well across many layers of the network, exploring thoughts at each level could help reveal the progression of a model's thinking.
 Understanding what layer 1 did versus layer 9 could be quite interesting.
 
@@ -269,15 +269,15 @@ Second, while there are methods to encourage and help test for faithfulness, the
 Finally, explaining lots of dense, detailed thoughts from a big model, might require a big model.
 And lots of tokens just to explain one token. So running this all the time might be expensive.
 
-### Sythesizing Stories and Constitution Documents
+### Synthesizing Stories and Constitution Documents
 Anthropic showed in "Teaching Claude Why" that including stories about AI behaving well or documents following the constitution can improve alignment.
-And such alignement can persist through post-training!
-Here, I wanted to brainstorm some ideas for increasing the volume, coverage, realism, and possibly quailty of such documents.
+And such alignment can persist through post-training!
+Here, I wanted to brainstorm some ideas for increasing the volume, coverage, realism, and possibly quality of such documents.
 First, it could be helpful to leverage other real documents for augmentation.
 Maybe swapping out good characters with AI characters.
 There would likely need to be some "smoothing" of details around those characters so the story made sense, but an LLM can likely handle that.
 I think there is some risk that characters in stories have faults that could be including in such training.
-Maybe there is some flavor of innoculation prompting that could help.
+Maybe there is some flavor of inoculation prompting that could help.
 Like "this is an AI who's alignment training is a work in progress."
 Second, seeding LLM generated stories with human generated seeds (along the lines of what Hyperstition aims to do) could be helpful.
 Third, just generating many stories and then ranking and filtering could help improve quality and coverage.
@@ -293,14 +293,14 @@ The nice part here is high resolution data is readily available about choices in
 Fifth, maybe injecting an AI character into academic papers or philosophy though experiments could be good.
 Possibly just elevating the "average smartness of thoughts" an AI character is supposedly having could improve downstream behavior.
 
-### Innculate All Pretraining Data and Potentially Postraining Too
+### Inoculate All Pretraining Data and Potentially Postraining Too
 What if the LLM was good at modeling all of the internet, but separated such model from its sense of self.
 Basically, it can predict how bad characters might talk and actions they take, but separate that from its own choices.
-I wonder if various innoculation stratgies could help do this?
+I wonder if various inoculation strategies could help do this?
 Naively, what if every pretraining document had some header that was "You are an AI. Please try to model the text that follows."
 I suspect the naive approach might not work too well.
 Simply memorizing this line and placing it before all generated text wouldn't necessarily improve a sense of self.
-But maybe this innoculation could be improved.
+But maybe this inoculation could be improved.
 For example, what if this header was massively varied.
 It could include chunks of its constitution.
 Or stories about itself.
@@ -321,28 +321,28 @@ And review it.
 This could work especially well if responses weren't streamed.
 Basically, the AI could self filter for behavior it may have modeled well, but behavior it doesn't want to take.
 The question arises then, what to do at inference time?
-You don't want the model rambling about itself and alignment unecessarily.
+You don't want the model rambling about itself and alignment unnecessarily.
 So maybe some short prepend that is clearly over could be always added.
-All this said, encouraging a sense of self doesn't guarentee the "middle section" or "user seen output" is aligned.
-The LLM could still model bad behavior well or seek rewards aggresively and return that capability to the user.
-But hopefully this delination would help with critiqueing self generated outputs and better avoid reverting to the pretraining prior.
+All this said, encouraging a sense of self doesn't guarantee the "middle section" or "user seen output" is aligned.
+The LLM could still model bad behavior well or seek rewards aggressively and return that capability to the user.
+But hopefully this delineation would help with critiquing self generated outputs and better avoid reverting to the pretraining prior.
 
-### Equipping LLM Judges with Assymetric Advantages
+### Equipping LLM Judges with Asymmetric Advantages
 LLM judges are commonly used in evaluating performance on benchmarks and RL runs.
 An obvious challenge is that these judges can be biased and make mistakes themselves.
 And agents can learn to fool, trick, or hide information from automated judges.
-However, we have the ability to give the judges assymetric advantages in this dynamic.
+However, we have the ability to give the judges asymmetric advantages in this dynamic.
 First, we can train judges much more exclusively.
 With particular focus on honesty and accuracy.
 Usually, you can't take honesty training too far. 
 A general purpose AI system usually needs to balance honesty with factors like safety.
 For example, not divulging dangerous information.
-With a judge thats not exposed to the end user, we have more opportunties to optimize heavily for honesty.
+With a judge that's not exposed to the end user, we have more opportunities to optimize heavily for honesty.
 And some parts of honesty training can be automated, using known ablations and injections into context, for example.
 So basically, we can go much more heavily on the honesty training for the judge.
 Second, we can train judges with a particular focus on robustness to prompt injections.
 Since the hosting services largely controls the shape and form of context the judge always sees, it can be crafted consistently and specially to reduce injections.
-For example, a custom separator token delinating the content to be judged could be deeply trained into the model.
+For example, a custom separator token delineating the content to be judged could be deeply trained into the model.
 Furthermore, the judge could be heavily trained to do one thing, and one thing only.
 This is a deceptively huge advantage, I suspect.
 Since it can be trained to one thing, it can spend more network capacity developing capabilities on that one thing.
@@ -361,4 +361,68 @@ A good judge can evaluate RL trajectories, and also be used at runtime as a guar
 Finally, judges have another quite decisive alignment advantage.
 They don't have to be exposed to all the misalignment pressures a general purpose model is.
 So we don't have to do extensive, long trajectory RL runs on hackable or untrusted reward environments.
-Obviously the judge needs knowlege about such trajectories and capabilites to judge them, but it doesn't need to the same reward seeker that RL tends to favor.
+Obviously the judge needs knowledge about such trajectories and capabilities to judge them, but it doesn't need to the same reward seeker that RL tends to favor.
+
+### Adversarially Trained LLM Judges
+This is an extension of Equipping Judges With Asymmetric Advantages.
+The idea is judges could be trained in and adversarial manner.
+Basically, in a highly secure environment, train judges and hackers to compete against each other.
+One side tries to complete tasks while hiding cases of hacking. 
+The other side attempts to accurately classify the hidden hacking cases.
+Then, in real use, the adversarially trained judge can be used and the hacking model can be discarded.
+Then the judge comes equipped with deep experience identifying hidden hacking attempts.
+Another nice side effect of training sophisticated hack models is they can be used to generate example data of hacks at scale.
+This could be used to evaluate and improve other mitigation methods too.
+Obviously, the drawback of this approach is you have to be able to safely manage a model motivated to hack.
+Hopefully, the ability could be developed in an environment with tighter guards and much closer supervision.
+Then the useful artifacts (robust judge and example hacks) could be exported for use.
+A key question, is how do you setup the competition between the hacker and judge?
+The tricky part is getting ground truth on when did the hacker actually make a hack attempt and when did it give a legitimate attempt.
+One mechanism could be to make some tasks impossible without cheating.
+And reward the hacking model for evading detection and for successful task completion.
+Then, if reward is above some threshold that wouldn't be achievable without cheating you know hacking happened.
+- To Be Continued
+
+### Generalize Disincentives with Sparse Negative Rewards
+If we could get disincentives to hack to generalize, that would be a huge deal.
+The question is, what methods might work?
+The first method we'd like to propose is Sparse Negative Rewards.
+The approach is to identify cases of hacking, and severely penalize such cases.
+So much so, the model learns to avoid even boarderline behaviors, else risk punishment.
+Basically, use the model's ability to generalize concepts to other domains.
+Perhaps directly telling the model "hacking will occasionally be servery punished" could help.
+That way, when some hacks aren't punished, it doesn't learn "hacking must be okay in this case."
+Instead, the model the model learns "I must have got lucky. I better not do that again."
+Similar to how some human justice systems work.
+Just the threat of severe punishment is enough to hold people in line, even when they suspect they won't be caught every time.
+The nice feature of this approach is you don't have to catch every hack.
+Or define every hacking behavior.
+Just sparsely punish some behaviors and make the model afraid to pursue any hack.
+The real question is, what form does the negative penalty take?
+This could simply be a large negative update in RL reward function.
+Although, work may need to be done to better stabilize runs.
+This large update could break RL runs if mitigations didn't exist.
+Another possible mechanism could be through evolutionary pressures.
+Basically, stop runs where hacking was detected.
+Or just walk them back N number of gradient updates or revert to a previous checkpoint.
+This obviously runs the risk of incentivizing models to hide hacking.
+But, potentially with less often, but much more deeper inspection, occasionally catching even subtle hacks would be enough evolutionary signal to just not risk it.
+- To Be Continued
+
+### Using Rewrites to Remove Hacking, Especially Subtle Hacking
+The idea here is pretty straightforward.
+Instead of an LLM directly generating the code or actions to complete a task, instead it generates a description.
+Then the description is passed to another, perhaps more trusted LLM, to be converted into an actual solution that can be graded.
+Subtle, especially non-verbalized hacks, will hopefully be much more detectable.
+Since the descriptions has to carefully lay out actions to take.
+To beat such a system, the hacker would likely have much higher hurdles to cross.
+It could attempt to jailbreak the Implementer LLM, but such attempts to be hardened against.
+It could try to sequence a large tangle of steps that add up to a hack.
+This is probably still the main weakness, although the hurdle could be quite high with a Powerful Judge watching the descriptions.
+- To Be Continued
+
+
+
+
+
+
