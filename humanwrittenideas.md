@@ -435,6 +435,51 @@ With this implementation, a judge can more carefully assess each action in isola
 The judge then determines if A) the explanation makes sense. B) The implementation matches the explanation. C) The action is aligned.
 - To Be Continued
 
+### Put a Descriptive Grade Before the SFT Trajectory
+##### Increase the effectiveness of SFT and decrease the need for dangerous RL
+The thought here is that LLMs are tasked with modeling a variety of trajectories.
+And the quality of the trajectory they are tasked with modeling varies.
+The problem is, the LLM doesn't know the type or quality of trajectory before generating it.
+It just has a vauge sense that trajectories are often selected for their high scores.
+However, we could provide the LLM with a detailed description of the grade before it was tasked with SFT.
+This way, it knows the nuances of what the trajectory did well, and what it didn't before attempting to generate.
+Maybe, even include data about the grader setup and its possible shortcomings.
+Basically, the trajectories should become a much less noisy feedback signal.
+When the grade comes after, and grades vary, the SFT task is under-specified.
+By putting the grade before, the SFT task becomes closer to having sufficient information to complete the task well.
+Furthermore, the approach synergizes well with deeply descriptive textual grades.
+Each grade can be a rich description of the trajectory.
+Additionally, its possible including lower grade results could still improve performance.
+Since the model knows what quality of trajectory its tasked with generating, it could fit to a variety of behaviors.
+And then at runtime, just specify that it should generate good ones (even though it knows well how to do bad ones).
+And since the grades can be rich text, it doesn't have to be binary.
+The LLM could learn how to model risk-taking trajectories, cautious trajectories, greedy trajectories, haphazard trajectories...
+Maybe, just maybe, some percentage of RL could be removed.
+With rich, varied trajectories with rich grades, maybe a certain portion of RL could be reduced.
+And hopefully reduce risk of reward hacking is reduced.
+
+### Experiments for removing the hacking tendency from heavily RL'ed models
+The thought here is one of the most valuable tools to have in our toolbox would be the ability to remove the hacking tendency from LLMs.
+Basically, develop some training(s) that take a hack-happy model, and make it desire to not hack.
+I assume there is already quite a bit of research in this space.
+And maybe some partially effective methods.
+The first, and obvious method, would be to finetune on trajectories without hacks.
+Maybe, if they were varied enough, or even discussed deciding not to hack, the behavior could generalize.
+There could still be issues of "Reverting to the hack-happy RL prior" though.
+And work would need to be done to mitigate that.
+Maybe a few rounds of Sparse Negative Rewards could help.
+(Tell the LLM that judges will randomly deeply investigate some runs and punish hacking heavily).
+And then do so.
+At the end of the day, it would be amazing to have experiments that show how what's needed to have hacking behavior show up.
+And what's needed to wipe the tendency away.
+In some ways this is a capability. 
+Just need to max the didn't-hack metric.
+There is some question as to how best craft these golden examples of not hacking.
+Ideally, they'd be in cases where it's very tempting to hack.
+And then maybe you could inject into the reasoning careful thinking through of deciding not to hack.
+- To Be Continued
+
+
 
 
 
