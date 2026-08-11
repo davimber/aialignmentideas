@@ -507,7 +507,10 @@ The model has a greater ability to flag such cases and change behavior, but it m
 Another question is it safe to train against this signal. And if so, how much?
 Its possible a capable hacker model could start to tease out when the swaps were made.
 Good randomization and realism would help prevent this, but it might still occur.
-If a capable model could ID such cases, it could sandbag and get the questions correctly wrong. 
+If a capable model could ID such cases, it could sandbag and get the questions correctly wrong.
+An extension of this approach could be to use these flagged cases as training data for a learned classifier.
+Then the learned classifier (probes, other LLMs, etc) could potentially generalize or find cases not previously flagged.
+And you could start an active learning cycle.
 One final note.
 This could be another case where Randomizing Everything could be helpful.
 Randomizing which answers get swapped out could be standard.
