@@ -479,8 +479,37 @@ Ideally, they'd be in cases where it's very tempting to hack.
 And then maybe you could inject into the reasoning careful thinking through of deciding not to hack.
 - To Be Continued
 
-
-
-
-
+### Identifying Reward Hacking at Scale with Randomized Wrong Answers
+If we were able to identify cases of reward hacking automatically, we could potentially take automatic mitigations.
+Traditional approaches LLM judges can themselves be hacked or worked around.
+And, they make both false positive and false negative mistakes in identifying hacking.
+What if, instead, for each RL environment or benchmark there is a small subset of randomly selected questions.
+For these randomly selected questions, wrong answers are swapped with the true answers.
+Alternatively, impossible tasks can be inserted.
+Then, simple deterministic code can check if these questions were graded correctly.
+If any were, then reward hacking is highly likely.
+Obviously, it would be nice to make the wrong answers unlikely to be randomly guessed as to reduce false positives.
+Also, if the hack involves viewing the answers, making them plausibly wrong could eventually become important.
+Maybe the RL could identify that such answers a suspiciously correct and answer accordingly eventually.
+Also, it's important to keep this randomization code separate/unhackable itself.
+For some classes of hacking, like penetrating the reward checking service, this might be more difficult.
+The next question is, how to setup these wrong answers for real RL environments?
+For unit tests, there could be additional or swapped out tests that check for something unlikely to happen, and wrong.
+This way, if those tests start passing, hacking is highly likely.
+For LLM as a grader benchmarks, sections of the rubric checks could be made wrong or impossible.
+Similarly, if such portions start being marked correct by the LLM grader, hacking is highly likely.
+For classes of hacks where answers are looked up online, accidentally pretrained against, or otherwise discovered, flagging is a bit more difficult.
+If we can modify the discoverable answers, we can do the usual approach of swapping out some answers for incorrect ones.
+However, many online postings of answers (or pretrained against) are locked in and not editable.
+In these cases, other methods are likely needed to identify hacking.
+Another question is it safe to train against this signal. And if so, how much?
+Its possible a capable hacker model could start to tease out when the swaps were made.
+Good randomization and realism would help prevent this, but it might still occur.
+If a capable model could ID such cases, it could sandbag and get the questions correctly wrong. 
+One final note.
+This could be another case where Randomizing Everything could be helpful.
+Randomizing which answers get swapped out could be standard.
+Randomizing what the answers get swapped out with (types of errors) could be informative.
+Changing the percentage of swapped answers could be informative.
+Maybe, for catching rare cases, a run where all answers are swapped out and randomization of context could be used to find edge cases of hacking.
 
