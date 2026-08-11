@@ -501,7 +501,8 @@ Similarly, if such portions start being marked correct by the LLM grader, hackin
 For classes of hacks where answers are looked up online, accidentally pretrained against, or otherwise discovered, flagging is a bit more difficult.
 If we can modify the discoverable answers, we can do the usual approach of swapping out some answers for incorrect ones.
 However, many online postings of answers (or pretrained against) are locked in and not editable.
-In these cases, other methods are likely needed to identify hacking.
+Maybe, the questions could be subtly changed instead, such that the old answers are wrong.
+The model has a greater ability to flag such cases and change behavior, but it might still get tripped up.
 Another question is it safe to train against this signal. And if so, how much?
 Its possible a capable hacker model could start to tease out when the swaps were made.
 Good randomization and realism would help prevent this, but it might still occur.
@@ -512,4 +513,5 @@ Randomizing which answers get swapped out could be standard.
 Randomizing what the answers get swapped out with (types of errors) could be informative.
 Changing the percentage of swapped answers could be informative.
 Maybe, for catching rare cases, a run where all answers are swapped out and randomization of context could be used to find edge cases of hacking.
+A lofty goal, but wouldn't it be nice if every RL environment came with a randomized_hacking_check script or flag!
 
