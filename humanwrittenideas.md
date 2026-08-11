@@ -480,6 +480,7 @@ And then maybe you could inject into the reasoning careful thinking through of d
 - To Be Continued
 
 ### Identifying Reward Hacking at Scale with Randomized Wrong Answers
+#### RLVH (Reinforcement Learning with Verifiable Hacks)
 If we were able to identify cases of reward hacking automatically, we could potentially take automatic mitigations.
 Traditional approaches LLM judges can themselves be hacked or worked around.
 And, they make both false positive and false negative mistakes in identifying hacking.
