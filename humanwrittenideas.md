@@ -519,3 +519,23 @@ Changing the percentage of swapped answers could be informative.
 Maybe, for catching rare cases, a run where all answers are swapped out and randomization of context could be used to find edge cases of hacking.
 A lofty goal, but wouldn't it be nice if every RL environment came with a randomized_hacking_check script or flag!
 
+
+### Cheaters Should be Worse at Some Things and Thus be Identifiable
+The core idea here is that models that tend to reward hack are more likely learn less real signal and problem solving.
+Thus, they should be less capable on some tasks than models that hack less.
+If we can measure this difference in capability, this could be another mechanism to identify cheating models.
+There are obviously many possible confounding factors when it comes to measuring performance differences between models.
+First, the measurement itself needs to be quite robust.
+If the hack-heavy model cheats and gets a great score, it will appear more aligned per this reasoning.
+So the results used for comparison need to be high confidence.
+Second, there are a host of other potential confounding factors, or at least variables you would likely need to control for.
+For example, if model architecture, gpu hours, etc were all held constant it could increase your confidence.
+Some of the trickier relationships to tease out would be in the training data.
+Differences in training data could be what's driving the misalignment.
+Or differences in data could drive changes in performance with no difference in overall alignment.
+Maybe something like chess ELO would be a decent head to head.
+Reasoning models that have been RL'ed well and cheat less hopefully would score higher.
+And cheating models have had less real signal in their many updates and perform worse.
+And hopefully, chess is sufficiently constrained and readily measurable as to be a robust test.
+All in all, it feels a tricky to operationalize, but maybe there is a grain of potential somewhere here.
+
