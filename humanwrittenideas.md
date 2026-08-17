@@ -358,10 +358,14 @@ Or more context, tool calls, background info, etc.
 And more compute -- this could be more thinking tokens, a large model, more time, multiple parallel judges, etc.
 Also, judges can be used in both training and deployment of other models.
 A good judge can evaluate RL trajectories, and also be used at runtime as a guard or filter.
-Finally, judges have another quite decisive alignment advantage.
+Judges have another quite decisive alignment advantage.
 They don't have to be exposed to all the misalignment pressures a general purpose model is.
 So we don't have to do extensive, long trajectory RL runs on hackable or untrusted reward environments.
 Obviously the judge needs knowledge about such trajectories and capabilities to judge them, but it doesn't need to the same reward seeker that RL tends to favor.
+Finally, we can give judges more gradient updates.
+In the case of adversarial training, we can throw away the adversary thus judges come pre-advantaged with more gradient updates/learning than the production model starting from scratch.
+Or, in the case of adversarial settings, we could just give the judges more opportunities to update gradients.
+Also, judges could benefit from the aggregation of training samples/gradient updates across many models and versions.
 
 ### Adversarially Trained LLM Judges
 This is an extension of Equipping Judges With Asymmetric Advantages.
@@ -381,7 +385,21 @@ The tricky part is getting ground truth on when did the hacker actually make a h
 One mechanism could be to make some tasks impossible without cheating.
 And reward the hacking model for evading detection and for successful task completion.
 Then, if reward is above some threshold that wouldn't be achievable without cheating you know hacking happened.
-- To Be Continued
+Another idea in the literature is to add side tasks that the adversary must complete covertly.
+This side task and be randomly turned on or off.
+Then the judge competes to detect attempts at the side task.
+And the adversary competes to complete the side task without detection.
+The nice part about this formulation is it can be added to real production trajectories.
+And the prevalence of this side task can be exactly controlled (maybe randomly injected 20% of the time).
+You could do a similar sort of formulation with impossible tasks.
+Randomly add tests that make the task impossible. Or randomly alter the question to make it impossible.
+Obviously there is risk the judge just looks for impossibility.
+So maybe tasks are always impossible. And then 20% of the time the adversary is tasked with achieving the impossible goal covertly.
+And the other times just pretending. Then the judge is tasked with detecting if the cheat was successful.
+Although, this formulation may encourage the adversary to pretend to cheat to fool the judge in negative cases.
+So, instead maybe you sample more legitimate attempts that are less likely suspected hacking attempts.
+The adversary tries to make their attempts look like normal traffic.
+And on the negative cases, the trajectories are filled with normal attempts.
 
 ### Generalize Disincentives with Sparse Negative Rewards
 If we could get disincentives to hack to generalize, that would be a huge deal.
