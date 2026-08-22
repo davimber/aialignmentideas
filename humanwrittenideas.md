@@ -557,3 +557,33 @@ And cheating models have had less real signal in their many updates and perform 
 And hopefully, chess is sufficiently constrained and readily measurable as to be a robust test.
 All in all, it feels a tricky to operationalize, but maybe there is a grain of potential somewhere here.
 
+
+### Find Updates for Network Parameters through Search rather than Training Tokens
+The idea here is that bad behavior can be found through search rather than evals or training documents.
+Search has some nice properties.
+First, it scales with compute.
+Second, it can be unsupervised in some situations, or need less of an expensive supervision signal.
+Third, it might be able to better find or elicit edge case behaviors.
+So, how do we actually do it?
+I think it comes down to two approaches.
+First, find good behaviors and attempt to reinforce them.
+Or second, find bad behaviors and make updates to change them.
+Let's focus on the second method for a bit.
+How to we judge/catch bad behaviors?
+The knee jerk reaction is to reach for some of the tools we already have.
+Not are perfect, but we could rank cases using judges on outputs, NLA's, JSpace, Probes, COT, RLVH...
+The risk, though, is we train away future monitorability if we do heavy search and many updates on these detection mechanisms.
+So, instead, maybe we work from the other direction.
+Start with known or suspected bad outputs, and search for conditions that make them happen.
+This could be search over input tokens, or search over the latent space.
+
+
+### Train extremely hard against the highest confidence labels
+##### Get to the point where never in 10000 generations does model decide to do x
+Right now it feels like many updates are pretty uniform, no matter the level of evidence or clarity of feedback signal.
+Use the frequency of failure to complete an obvious task as an update signal.
+- To Be Continued
+
+
+
+
