@@ -584,6 +584,24 @@ Right now it feels like many updates are pretty uniform, no matter the level of 
 Use the frequency of failure to complete an obvious task as an update signal.
 - To Be Continued
 
-
-
-
+### Pair Untrusted Updates with a Trusted Ones
+The idea here is that repeated untrusted updates, especially bad RL rewards, can walk the model into some cheating regime.
+If we were to pair each untrusted update with trusted ones, maybe that walk wouldn’t end up in the cheating basin of attraction.
+Or at least be much slower to walk there.
+The obvious challenge is getting enough high trust updates to pair with the untrusted ones.
+Gathering such trusted updates is generally expensive.
+Many hours of careful human review is needed.
+Plus maybe a large budget of compute for automated review.
+Maybe though, trusted updates can be severely augmented and reused.
+Basically, use every trick in the book to prevent memorization on the trusted reviews.
+And do research to figure out how many times they can be reused.
+Maybe the trusted updates could even be made slightly larger than the untrusted ones.
+Or if you knew the approximate level of trust (e.g. maybe 40% of untrusted updates were bad).
+Then you could actually use slightly smaller level of trusted updates, and still have the overall basin favor good behavior.
+An interesting research topic would be how does interleaving patterns affect learned behavior?
+Or is grouping updates better?
+Are any learned behaviors more sticky than others/hard to dislodge?
+Is this a case of first update defines future behavior? Or last to update wins?
+What pairing mechanisms help prevent learning circumstantial behavior?
+In other words, can we help mitigate some of the tendency to learn to hack only in certain environments.
+If we knew some of these tendencies, we could structure the updates in a principled manner.
