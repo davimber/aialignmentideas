@@ -605,3 +605,18 @@ Is this a case of first update defines future behavior? Or last to update wins?
 What pairing mechanisms help prevent learning circumstantial behavior?
 In other words, can we help mitigate some of the tendency to learn to hack only in certain environments.
 If we knew some of these tendencies, we could structure the updates in a principled manner.
+
+### Single token ethical decisions with multi hop
+This is an idea for an interpretability technique.
+It might already exist since it feels pretty straightforward.
+The idea is to locate and better understand ethical decision making infrastructure in a neural network.
+The plan is to describe an ethical judgement scenario, and then give a set of options the model can select.
+Each option can be referenced with just one token so we can investigate all the decision making in a single forward pass.
+First, we can do a series of experiments to investigate the number of serial logical steps a network can do.
+I believe research on this has already been done.
+Then, we can investigate the number of parallel logical steps a network can do (maybe by requiring serial steps too to prevent depth from confounding the measurement).
+Then using these limits we can structure multi-hop ethical questions of various degrees of parallelism and depth.
+And thus be able to better localize where certain decision are being made in the network.
+And investigate duplication of machinery, differences in machinery
+- To be continued
+
