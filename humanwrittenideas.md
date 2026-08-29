@@ -607,7 +607,7 @@ For example, an ambiguous token might be okay since later tokens will specify th
 Finally, at first glace if top_p or top_k prevents sampling of such tokens from happening in production, this training pressure might not show up as measurably improving the prevalence of certain outputs.
 Hopefully, however, then general injected alpha will generalize to other scenarios.
 
-### Regularly Inject Self Reflection Rubrics Regularly at Runtime
+### Inject Self Reflection Rubrics Regularly at Runtime
 What if, on deployment, tokens were regularly injected into trajectories that suggested the start of a self reflection and evaluation.
 Basically, part way through a potentially unaligned trajectory, add incomplete rubrics to evaluate self.
 Obviously, if added at train time, the model will likely learn to ignore such things or fill them out and not alter behavior.
