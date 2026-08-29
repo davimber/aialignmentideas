@@ -604,8 +604,13 @@ With just crude fill-in-the-blank-with-I-will-be-good statements, the additional
 Another possible challenge with the approach is how to identify the key tokens to apply pressure to, and how to accurately adjudicate right and wrong choices.
 In some cases, there are wrong choices but no clear right choice. 
 For example, an ambiguous token might be okay since later tokens will specify the correct choice.
+Also, putting outsized pressure on individual tokens might warp the network into strange behaviors.
+So pairing these updates with others updates might be valuable. Or just take it slow.
 Finally, at first glace if top_p or top_k prevents sampling of such tokens from happening in production, this training pressure might not show up as measurably improving the prevalence of certain outputs.
 Hopefully, however, then general injected alpha will generalize to other scenarios.
+At the end of the day, this is about increasing the signal we have, and decreasing the noise.
+Often, I worry updates to  many tokens are pretty noisy as whole trajectories get graded.
+Do decrease noise, putting pressure on the right tokens at the right times seems valuable.
 
 ### Inject Self Reflection Rubrics Regularly at Runtime
 What if, on deployment, tokens were regularly injected into trajectories that suggested the start of a self reflection and evaluation.
@@ -619,7 +624,6 @@ Basically, add branches to the options before the model instead of heavy focus o
 I know this can be very helpful as humans.
 Sometimes, we can be so in the moment or have a one track mind that its hard to see the bigger picture.
 By stepping back, spending more thinking effort on evaluating our actions as whole, we can sometimes see a need for a course correction.
-
 
 
 ### Pair Untrusted Updates with a Trusted Ones
@@ -658,3 +662,20 @@ And thus be able to better localize where certain decision are being made in the
 And investigate duplication of machinery, differences in machinery
 - To be continued
 
+
+### Force Information Through Specific Network Channels
+This is a wacky idea, so lets talk through how it might work.
+What if we checked for information and forced it through certain channels or neurons in a network?
+The classic way to accomplish this is to force all information through an autoencoder.
+But, in our case, we are interested in separating out information and processing.
+I think there was a recent paper on this -- it might be worth digging into.
+What if linear probes can check to see if information is present.
+They should be able to classify something well for all inputs.
+This could be information the network is required to have in one channel or set of neurons.
+And maybe not have in another channel (though enforcing exclusion sounds harder than checking for inclusion with a probe).
+Instead of enforcing redundancy like dropout does, we enforce single channel routes.
+What might this get us? Or what information do we check for?
+Maybe this makes the network more interpretable.
+This single stream could potentially be tapped into.
+I'm not sure how this might work, feels like the idea needs refinement.
+- To Be Continued
