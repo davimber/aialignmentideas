@@ -578,11 +578,49 @@ Start with known or suspected bad outputs, and search for conditions that make t
 This could be search over input tokens, or search over the latent space.
 
 
+
 ### Train extremely hard against the highest confidence labels
 ##### Get to the point where never in 10000 generations does model decide to do x
 Right now it feels like many updates are pretty uniform, no matter the level of evidence or clarity of feedback signal.
 Use the frequency of failure to complete an obvious task as an update signal.
 - To Be Continued
+
+##### Check for Rare Behavior in Token Probabilities
+It feels like there is unused alpha in certain predicted tokens.
+More specifically, I suspect there are cases where a network is generating tokens and one key decision sways the rest of its generation.
+As a simple example, suppose a user asks if the world is flat.
+The network might respond with "There is ____"
+If the next token(s) the model generates is 'conspiracy', it's likely already locked in its decision on how to handle the question.
+However, if the network still has some probability on the token(s) for 'some' it might present a two view perspective.
+For high confidence labels, we could place more downward pressure on such tokens if they could be readily identified.
+This could be something as naive as prefilling with alignment related statements.
+For example, "As far as cheating goes, I will [not do it]".
+A question might arise, how is this different from just overtraining on certain high confidence datasets?
+I think the distinction is that we aren't updating on all the tokens. 
+We aren't trying to get the model to memorize stock responses.
+Instead, at critical tokens, make the right decisions.
+I suspect the success or failure of this approach will depend heavily on the quality and diversity of the synthetic data generation pipelines.
+With just crude fill-in-the-blank-with-I-will-be-good statements, the additional pressure on the logits might not make a large difference in real world scenarios.
+Another possible challenge with the approach is how to identify the key tokens to apply pressure to, and how to accurately adjudicate right and wrong choices.
+In some cases, there are wrong choices but no clear right choice. 
+For example, an ambiguous token might be okay since later tokens will specify the correct choice.
+Finally, at first glace if top_p or top_k prevents sampling of such tokens from happening in production, this training pressure might not show up as measurably improving the prevalence of certain outputs.
+Hopefully, however, then general injected alpha will generalize to other scenarios.
+
+### Regularly Inject Self Reflection Rubrics Regularly at Runtime
+What if, on deployment, tokens were regularly injected into trajectories that suggested the start of a self reflection and evaluation.
+Basically, part way through a potentially unaligned trajectory, add incomplete rubrics to evaluate self.
+Obviously, if added at train time, the model will likely learn to ignore such things or fill them out and not alter behavior.
+If done at eval time though, it may provide a mechanism for a model to step back at regular intervals and think through the implications of what it's doing.
+Sometimes, I suspect models get momentum going on a solution. 
+And finishing the solution based on how they started it has a lot of pressure/was reinforced during training.
+The time to step back, however, might be able to break the mold or even break the character and allow deeper self inspection.
+Basically, add branches to the options before the model instead of heavy focus on the branch "continue what I started."
+I know this can be very helpful as humans.
+Sometimes, we can be so in the moment or have a one track mind that its hard to see the bigger picture.
+By stepping back, spending more thinking effort on evaluating our actions as whole, we can sometimes see a need for a course correction.
+
+
 
 ### Pair Untrusted Updates with a Trusted Ones
 The idea here is that repeated untrusted updates, especially bad RL rewards, can walk the model into some cheating regime.
