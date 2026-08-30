@@ -679,3 +679,35 @@ Maybe this makes the network more interpretable.
 This single stream could potentially be tapped into.
 I'm not sure how this might work, feels like the idea needs refinement.
 - To Be Continued
+
+
+### Agent Decides Which RL Trajectories it Wants to Update On
+This comes from the thought that as humans, we have the ability to self analyze and decide how to update based on feedback.
+While not perfect, it allows us to reject some noisy or even flat out incorrect rewards.
+And have some say in who we want to be despite outside pressure on us.
+The idea is that agents could similarly benefit.
+Instead of being forced to update on every RL trajectory, and update by a forced amount, the agent itself would get to adjudicate and decide.
+After completing a generation, there would a self-analysis step where the agent decides if it wants to update (and maybe how strongly).
+Hopefully, this could help mitigate some reward hacking.
+The agent can recognize when it decided to take a shortcut, and then decide to update on that or not.
+There are a few nice features to this setup.
+First, we get frontier-level monitoring capabilities.
+Since the best agents available are likely those in training, we bring potentially the most intelligence to bear on monitoring.
+And it scales with model capability.
+Second, you don't need to dilute the ability of other monitors by training against them and learning their weaknesses.
+Third, a model is likely able to better detect hidden cheating when itself did the hiding.
+It can be hard to hide from your own thoughts and capabilities.
+Fourth, the model's thinking about the trajectory could be prepended as a kind of self-inoculation.
+The full update could begin with the model weighing the pros and cons, giving a self grade with uncertainty, and then the RL trajectory.
+Fifth, we know LLM's can model a variety of personas and behaviors.
+Its possible with good delineation of responsibilities, the review step could elicit another persona, maybe even the chat assistant.
+Thus, some level of stepping-back or ability to be self critical could be achieved.
+The obvious challenge with this approach is that the agent needs to pick good runs to update on.
+If it starts picking reward hacked runs, it may lead to a runaway process where it favors them more and more.
+The base reward signal is still fundamentally tainted, and avoiding that poison may take a lot of intelligence.
+Potentially, the model just wouldn't be smart enough initially to bootstrap itself into a good regime.
+A second challenge is potential stability issues.
+The model may degenerate into producing very safe but invaluable solutions.
+Or decide to never update on anything.
+Or just update on everything and get no gains from the method.
+By adding an outer loop, we're adding complexity to the optimization process.
