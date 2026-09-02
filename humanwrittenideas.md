@@ -682,6 +682,7 @@ I'm not sure how this might work, feels like the idea needs refinement.
 
 
 ### Agent Decides Which RL Trajectories it Wants to Update On
+##### Or how much it wants to update
 This comes from the thought that as humans, we have the ability to self analyze and decide how to update based on feedback.
 While not perfect, it allows us to reject some noisy or even flat out incorrect rewards.
 And have some say in who we want to be despite outside pressure on us.
@@ -702,6 +703,8 @@ The full update could begin with the model weighing the pros and cons, giving a 
 Fifth, we know LLM's can model a variety of personas and behaviors.
 Its possible with good delineation of responsibilities, the review step could elicit another persona, maybe even the chat assistant.
 Thus, some level of stepping-back or ability to be self critical could be achieved.
+Sixth (and this thought is a bit out-there so maybe disregard this) I wonder if we could let the LLM "feel" the tug of the update.
+And then let it decide what to do with this tug.
 The obvious challenge with this approach is that the agent needs to pick good runs to update on.
 If it starts picking reward hacked runs, it may lead to a runaway process where it favors them more and more.
 The base reward signal is still fundamentally tainted, and avoiding that poison may take a lot of intelligence.
@@ -726,6 +729,8 @@ The question then, is how to get this alpha into the model, and get it to transl
 It could be injected with the prompt at some frequency.
 Or be given to grader's either as part of a rubric or context for a rubric.
 It could be used to form a sort of constitution.
-Or a kind of legal contract for a task (although rigidly following rigid rules and only checking those rules doesn't feel like a great recipee for generalizing intrinsic motivation to be aligned.
-Another ideas is that the content could be prefilled/injected into a model's reasoning about a task.
+Or a kind of legal contract for a task (although rigidly following rigid rules and only checking those rules doesn't feel like a great recipe for generalizing intrinsic motivation to be aligned).
+Another idea is that the content could be prefilled/injected into a model's reasoning about a task.
 Basically, if the developer's reasoning was approximately aligned, teaching the model to think in the same way could help.
+
+
