@@ -711,3 +711,21 @@ The model may degenerate into producing very safe but invaluable solutions.
 Or decide to never update on anything.
 Or just update on everything and get no gains from the method.
 By adding an outer loop, we're adding complexity to the optimization process.
+
+
+### Have RL Environment Developers Spend 20 Minutes Talking Through Each Task
+##### This could be freeform Voice-To-Text or a long typed list of do's, dont's, and considerations
+The thought here is that developers have a large amount of alpha in their minds.
+And only a narrow sliver typically gets added to individual tasks.
+Maybe there is a task description, and a handful of tests to check the solution.
+But the developer's mind contains so much more rich information than that.
+If we could leverage this information, and could pass some of it to the model, that might translate into less reward hacking.
+For example, the developer likely has a massive mental list of things they would find bad/hacking/off task.
+Maybe they have inklings of possible work arounds that wouldn't truly solve the solution but may get the tests to pass.
+The question then, is how to get this alpha into the model, and get it to translate to better alignment.
+It could be injected with the prompt at some frequency.
+Or be given to grader's either as part of a rubric or context for a rubric.
+It could be used to form a sort of constitution.
+Or a kind of legal contract for a task (although rigidly following rigid rules and only checking those rules doesn't feel like a great recipee for generalizing intrinsic motivation to be aligned.
+Another ideas is that the content could be prefilled/injected into a model's reasoning about a task.
+Basically, if the developer's reasoning was approximately aligned, teaching the model to think in the same way could help.
