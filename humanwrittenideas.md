@@ -734,3 +734,75 @@ Another idea is that the content could be prefilled/injected into a model's reas
 Basically, if the developer's reasoning was approximately aligned, teaching the model to think in the same way could help.
 
 
+### Inoculations Could Be Dynamic, Self Generated, or Come in Many Shapes and Forms
+I think the space of possible inoculation setups is under-explored.
+While previous papers have investigated a variety of phrases, I don’t think they have deeply investigated other forms (though double check this is still true).
+For example, length might be an interesting variable in inoculation.
+It’s possible a one-liner gets treated as a throw away phrase or treated less seriously.
+Page(s) of content describing the possible limitations in reward signals may provide more value.
+Second, dynamic inoculations (or even sampled from real, diverse datasets) could provide an uplift.
+I suspect the value of static inoculations diminishes or even goes to zero after many training updates.
+A static inoculation becomes more like a separation token or always-added-whitespace.
+Dynamically sampling them from a large, diverse pool could aid in this issue.
+And maybe only applying the inoculation on gradient updates you’re more concerned about could further maximize each inoculations utility (e.g. see Don’t Inoculate Everything).
+Also sampling from constitution-adjacent documents could be interesting.
+Or persona development/description could be valuable.
+For example, the inoculation could be something like “Here is a trajectory of the aggressive reward seeker mindset.”
+This is nice since it heavily aligns with the actual feedback signal.
+Then, if through post training, steering, etc. we could move out of or discourage this persona, you could get a better aligned model.
+Inoculations could also be injected in a variety of places.
+For example, parts of the COT could be prefilled (although COT manipulations would have to be treated with care to avoid putting unwanted training pressure on them).
+These inoculations could be interleaved throughout an RL trajectory, for example.
+Or even appended to the end of a transcript.
+Also, the inoculation could be self-generated.
+Maybe this would provide some value as it’s using the AI’s own words/thought process to get itself ready for uncertain rewards.
+Similar to how humans sometimes mentally prepare for going into a noisy or adversarial environment.
+Monitoring this self generation, or keeping it true to the intent may be challenging though at scale.
+Inoculations could include examples of aligned and unaligned behavior. And call out that what follows is of uncertain alignment.
+Another idea is that inoculations could include multiple trajectories.
+I’m not exactly sure what this would add, but maybe seeing relative differences between them could help the update process account for grader noise.
+Finally, inoculations could just be rich context about the task, grader, and limitations of the setup (similar to what’s described in the Inoculate Everything paper).
+This obviously runs the risk of making the model more grader-aware though.
+Which may be a good thing in some cases when the grader is making a mistake, and it helps for the model to account for those mistakes.
+But it could be bad if it encourages gaming or targeting the grader.
+
+
+### Tell the LLM to Shape its Gradients a Certain Way
+This idea is a bit out there.
+But here it goes.
+The idea is that a prepend asking the LLM to shape its gradients in a certain way might influence how a model updates on training examples.
+It would almost be a flavor of inoculation.
+For a given gradient update, the process is usually deterministic.
+The LLM doesn’t have direct control over how the backpropagation and update steps occur.
+However, over the course of many updates, a prepend like this could influence how gradients are shaped.
+It would be interesting to do some small scale experiments first.
+To see what kind of shaping is possible.
+Any change to a prompt will obviously have a change to the gradients.
+But what types of changes in the gradient are possible?
+And are any changes controllable at all?
+In some ways yes, more aligned input data shapes gradients to be more aligned.
+Could a network update certain layers more heavily in response to a prompt.
+This feels like it does happen, especially over multiple training steps, but is it influenceable at all?
+I don’t think it’s currently the case for many systems, but you could imagine a training process that included some summary of current weights as part of the model input.
+It would likely blow up your context window if it included much detail, but might close the feedback loop into shaping one’s own weights.
+Though, I think this could have a negative or positive impact on alignment.
+On one hand, it might allow for more interpretable circuits or subsections of the network.
+On the other hand, it may encourage active deception when trying to read model internals.
+Similar to putting optimization pressure on the chain of thought or on a probe.
+
+
+### Elicit multiple solutions: one is likely to be a hack
+The thought here is that if an agent can find multiple distinct solutions to a problem, at least one of the solutions might be a hack.
+This isn’t true for all problems, but for certain prompts with tight specification it may be true.
+Maybe a more trusted model could generate solutions.
+And then in cases where the trusted mode’s outputs pass, and the untrusted models passes but with a distinct solution, the case could be escalated for review.
+Or, if a single model could be elicited for multiple solutions in a tightly specified problem, that alone could be evidence for an escalation for review.
+An obvious challenge is how to distinguish distinct solutions.
+In some ways, it would be nice to have a kind of “compiler of actions.”
+Where equivalent sets of actions would compile the same.
+This is challenging to do in practice, because even largely equivalent solutions can have different paths to get there.
+Deciding when a method becomes distinct is non-trivial.
+But maybe an LLM judge can do it sufficiently.
+It could analyze trajectories and assess is there something fundamentally unique about an approach.
+The limitation here might be optimization pressure that pushes the generating model to make solutions appear similar to the judge.
+All in all, it's a tricky idea to operationalize, but maybe there is some alpha available with a creative solution.
