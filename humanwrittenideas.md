@@ -809,9 +809,9 @@ All in all, it's a tricky idea to operationalize, but maybe there is some alpha 
 
 
 ### Honeypot Everything: All RL Environments, Eval Tasks, and Production Traffic
-Honeypots have large potential. (As discussed in Reinforcement Learning with Verifiable Hacks RLVH).
+Honeypots have a large potential. (As discussed in Reinforcement Learning with Verifiable Hacks RLVH).
 They can be diverse, detailed, randomized, and be reasonably robust to many forms of evasion if well designed.
-A common problem in preventing reward hacking and aligning agent behavior is getting a large, quality feedback signal.
+In reward hacking, a common problem for prevention is getting a large, quality feedback signal.
 Using a fixed set of weights judge is a fixed number of possible bits of feedback.
 Using a probe is a fixed number of possible bits of feedback.
 Human review is a little better as number of bits of feedback can scale with human-hours, but it can be costly and slow.
