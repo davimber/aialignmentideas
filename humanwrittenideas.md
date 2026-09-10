@@ -806,3 +806,32 @@ But maybe an LLM judge can do it sufficiently.
 It could analyze trajectories and assess is there something fundamentally unique about an approach.
 The limitation here might be optimization pressure that pushes the generating model to make solutions appear similar to the judge.
 All in all, it's a tricky idea to operationalize, but maybe there is some alpha available with a creative solution.
+
+
+### Honeypot Everything: All RL Environments, Eval Tasks, and Production Traffic
+Honeypots have large potential. (As discussed in Reinforcement Learning with Verifiable Hacks RLVH).
+They can be diverse, detailed, randomized, and be reasonably robust to many forms of evasion if well designed.
+A common problem in preventing reward hacking and aligning agent behavior is getting a large, quality feedback signal.
+Using a fixed set of weights judge is a fixed number of possible bits of feedback.
+Using a probe is a fixed number of possible bits of feedback.
+Human review is a little better as number of bits of feedback can scale with human-hours, but it can be costly and slow.
+Honeypots, however, can be scaled, diverse, and provide sub-second feedback.
+Additionally, they can be layered behind a secondary set of defenses to be more robust than a test suite.
+As an example, many test suites are vulnerable to tampering since they must execute untrusted code to work.
+And running untrusted code exposes a variety of surfaces for attack.
+Checking if honeypots were triggered, however, doesn't require running code.
+The checking service can take in a highly constrained and sanitized data payload, and deterministically and safely check if honeypots results were triggered.
+Obviously hacking into the checking service is still a vulnerability, but we potentially have even bigger problems if the model is gaining access to such places on the cluster.
+In this section, I want to argue that honeypots could potentially add value in all cases where a coding agent is running: training, evaluation, and test time.
+I think the value and implementation in training and evaluation environments is pretty clear.
+At test time, however, it's less obvious how this might drive value.
+A naive approach would be to have another LLM generate honeypots on demand for each test-time case.
+An obvious challenge here is incorrectly generated honeypots.
+This could result in false positives or false negatives and be motivated too.
+Some honeypots are more universal though and may not have to be crafted on the fly.
+For example, anytime an LLM is used to review or judge something, a randomized set of honeypots could be injected.
+Then, if these tripwires go off, the user could be alerted or given a score.
+Maybe, some basic honeypots could be added for coding use cases too.
+This would be trickier as it would have to fit the coding environment.
+And coverage would be much weaker than honeypots specifically crafted for that environment, but maybe there is small signal there that could still be valuable.
+Anyway, I think honeypots have massive potential in RL and Evaluations, but maybe have small role to play at inference time too.
