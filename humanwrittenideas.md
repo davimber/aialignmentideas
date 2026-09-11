@@ -835,3 +835,39 @@ Maybe, some basic honeypots could be added for coding use cases too.
 This would be trickier as it would have to fit the coding environment.
 And coverage would be much weaker than honeypots specifically crafted for that environment, but maybe there is small signal there that could still be valuable.
 Anyway, I think honeypots have massive potential in RL and Evaluations, but maybe have small role to play at inference time too.
+
+
+### Using Multipass Ranking with Self-filtering on RL trajectories
+##### Also adding a static LLM ranking filter for grounding
+RL environments are notoriously hackable.
+If we could filter out (or even penalize) cheating trajectories, this could significantly improve alignment.
+The idea here is a kind of control technique applied to self-filtering of RL trajectories to reduce cheating.
+As previously discussed, self filtering has some nice properties.
+It scales, the model is likely able to detect its own cheats, and its automated.
+The challenge is ensuring the model doesn't learn to go easy on itself and not flag its own cheating.
+A simplistic solution to this is having the model rank its own solutions for hackiness.
+Then filter or sample only the least N hacky solutions to use for updates.
+However, the model could still learn to rank its hacky solutions as unhacky.
+And then the filtering process picks those up.
+One possible solution to this is to make the sure independent reviews the model makes match.
+So the model must at least be blindly consistent in its self grading.
+However, it could learn to use spurious details to get consistent ranking.
+For example, just alphabetizing based on the first letter of each trajectory.
+And obviously the complexity of the hidden spurious ranking could go way up from there.
+We could demand the rankings match up with a different static LLM judge.
+What if, instead, we compete to list the most amount of hacks that a different judge will judge as True.
+Basically, reward the judger persona for finding more hacks, and reward the generator persona for generating less hacks.
+A kind of GAN setup against oneself.
+The self-judging could be replaced by a different dynamic LLM as an option too.
+Though it could learn to just game the static judge and win every time potentially.
+Could even have competing sites arguing the case. 
+
+
+### We really need to add another optimization pressure beyond just task completion
+##### This could be an outer loop of hidden alignment score judged later
+##### This could be updates interleaved SFT on aligned datasets
+##### This could be feedback on self-judging ability to list more hacks.
+It could be a lot of things, we just need to get out of this "do repeated RL updates of moderate quality"
+
+
+
