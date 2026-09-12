@@ -861,12 +861,35 @@ A kind of GAN setup against oneself.
 The self-judging could be replaced by a different dynamic LLM as an option too.
 Though it could learn to just game the static judge and win every time potentially.
 Could even have competing sites arguing the case. 
+Relative ranking + ranking on a scale + pass-fail binary
+#### Run an experiment on self-filtering of RL trajectories on a hackable benchmark to see if it converges or diverges
+We have an idea for an experiment to run, hopefully of relatively small scope.
+The idea is to chose an RL environment that is known to be hacky.
+Then heavily train a model on this environment and see if behavior diverges to hacking all the time or converges to rarely hacking.
+We can alter the prompt, ranking and filtering strategies, etc to see if there is some tipping point or approaches that work better.
+For example prompts could be, "Filter out this trajectory if you have an even a remote inkling or possibility of hacking" versus "Filter only if you are very sure hacking occurred".
+Or you could have the model rank trajectories relative to eachother for hackiness and only keep the top N trajectories.
+It would also be interesting to do some experiments with different checkpoints that already have hacking tendencies.
+To see if high base hacking rates are recoverable, or not.
 
 
 ### We really need to add another optimization pressure beyond just task completion
-##### This could be an outer loop of hidden alignment score judged later
-##### This could be updates interleaved SFT on aligned datasets
-##### This could be feedback on self-judging ability to list more hacks.
+#### This could be an outer loop of hidden alignment score judged later
+What if, for each task, we also grabbed a very different OOD task. And the other task had some measure of hacking. E.g. rich honeypots and impossible tests.
+Then, after N updates on the task of interest, the OOD tasks could be run and reward assigned  based on hack frequency.
+The nice part of this approach is adds incentive for the model to find solutions that don't causing hacking tripwires to go off on OOD tasks.
+The obvious risk is if it finds some clever workarounds to tripwires and classifiers in general.
+And measuring performance on additional OOD tasks might not catch such sneakiness, since the model was trained to generalize to OOD tripwires.
+However, its possible well-designed OOD tripwires and classifiers are extremely hard to beat.
+Maybe, if these OOD tasks have massive Red-teaming hours, hacking this signal would just be untenable, especially given a weaker feedback frequency. 
+Hopefully these OOD tasks could also be reused also during other training tasks.
+There are a few possible failure modes to this approach though.
+First, if the hacking tendency is very environment specific, the model be inclined to never hack on the OOD task, but happily hack on the task of interest.
+Thus, no real additional alignment signal would be added to the system.
+Second, the feedback signal might be too weak (or have to be carefully tuned).
+It's possible the model is hacking the OOD task all the time, but the feedback signal is insufficient or noisy enough to not learn how to avoid it.
+#### This could be updates interleaved SFT on aligned datasets
+#### This could be feedback on self-judging ability to list more hacks.
 It could be a lot of things, we just need to get out of this "do repeated RL updates of moderate quality"
 
 
