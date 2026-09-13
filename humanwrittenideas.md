@@ -902,7 +902,7 @@ The thought here is it would be nice to be able to search a set of trained weigh
 This can be challenging to do just be putting the model in many environments and attempting to elicit malign actions.
 What if, we distilled a model on reversed token order?
 In that way, this reverse-direction model could be "prompted" with a bad behavior, and asked to recreate likely scenarios that caused it.
-A nice part about this approach is we have a near strong training signal (mass distillation from the original model).
+A nice part about this approach is we have a strong training signal (mass distillation from the original model).
 A few challenges exist though.
 First, this reverse token generator will likely be imperfect, perhaps very imperfect.
 I recall seeing research that generating English in reverse is a very different (and sometimes harder task) than generating it in a forward direction.
