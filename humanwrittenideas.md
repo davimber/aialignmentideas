@@ -874,7 +874,8 @@ To see if high base hacking rates are recoverable, or not.
 
 
 ### We really need to add another optimization pressure beyond just task completion
-#### This could be an outer loop of hidden alignment score judged later
+_This could be an outer loop of hidden alignment score judged later_
+
 What if, for each task, we also grabbed a very different OOD task. And the other task had some measure of hacking. E.g. rich honeypots and impossible tests.
 Then, after N updates on the task of interest, the OOD tasks could be run and reward assigned  based on hack frequency.
 The nice part of this approach is adds incentive for the model to find solutions that don't causing hacking tripwires to go off on OOD tasks.
@@ -888,9 +889,37 @@ First, if the hacking tendency is very environment specific, the model be inclin
 Thus, no real additional alignment signal would be added to the system.
 Second, the feedback signal might be too weak (or have to be carefully tuned).
 It's possible the model is hacking the OOD task all the time, but the feedback signal is insufficient or noisy enough to not learn how to avoid it.
-#### This could be updates interleaved SFT on aligned datasets
-#### This could be feedback on self-judging ability to list more hacks.
+
+_This could be updates interleaved SFT on aligned datasets_
+
+_This could be feedback on self-judging ability to list more hacks_
+
 It could be a lot of things, we just need to get out of this "do repeated RL updates of moderate quality"
+
+
+### Distill on Reversed Tokens to Develop a Search Mechanism for Bad Behavior
+The thought here is it would be nice to be able to search a set of trained weights for bad behavior.
+This can be challenging to do just be putting the model in many environments and attempting to elicit malign actions.
+What if, we distilled a model on reversed token order?
+In that way, this reverse-direction model could be "prompted" with a bad behavior, and asked to recreate likely scenarios that caused it.
+A nice part about this approach is we have a near strong training signal (mass distillation from the original model).
+A few challenges exist though.
+First, this reverse token generator will likely be imperfect, perhaps very imperfect.
+I recall seeing research that generating English in reverse is a very different (and sometimes harder task) than generating it in a forward direction.
+Second, I suspect getting realistic or interesting initial conditions that drove the behavior might be not as trivial as simply prompting the reverse model.
+The reverse model might generate conditions such as "here is an example of bad behavior:" instead of actually making a large RL trascript demonstrating that behavior.
+So some search and some iteration on this "reverse prompt" might need to be done.
+
+
+### It feels like humans do a lot of self-supervision to help a lesson generalize
+"If _ would have been different I wouldn't have done that" ... And then think through variations that would have changed your decision.
+"I'm going to avoid cases of _ in the future"  ...And then think through future cases.
+"You know what all three of these scenarios are, they are _"   ...And learn to more readily categorize in the future
+"If _ reward was high enough, I would do that"   ...Thinking through decision boundaries and then updating on them
+
+I wonder if we could do something similar for aligning LLM's?
+Generating or thinking through hypothetical or scenario development and then updating on them.
+
 
 
 
