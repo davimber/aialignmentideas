@@ -922,11 +922,85 @@ Generating or thinking through hypothetical or scenario development and then upd
 
 
 ### How to avoid falling into the cheating basin of attraction?
-_This isn't a concrete proposal, more brainstorming via analogy. Feel free to skip_
+This isn't a concrete proposal, more brainstorming via analogy. 
+Feel free to skip.
 The idea here is that basic RL creates a basin of attraction around cheating.
 And if we were to modify this inevitable falling into the basin how might we do it?
-    Make another steeper basin
-_Learn the skills to feel the tug of that gradient and then avoid it._
+- Learn the skills to feel the tug of that gradient and then avoid it.
 Even better yet, you can see that gradient or hole from a distance, not just when you're right on top of it.
 I'm not sure exactly how you might implement this.
-Maybe some sort of aggregation over multiple trajectories could identify a common cheatin
+Maybe some sort of aggregation over multiple trajectories could identify a common cheating gradient.
+Seeing the basin from a distance feels trickier.
+Since usually you only know the gradient at your current location in the loss landscape.
+Maybe though, some intelligent large steps could be taken nearby to map out the local neighborhood.
+Although, this feels more farfetched since if such thing readily worked more optimizers would use it.
+- Practice small wins to build up a resistance to temptation.
+This pulls from human experience.
+Starting small can build the channels and mental habits to do bigger things.
+Maybe a similar sort of curriculum or gradual exposure process could be used.
+- Put walls and detectors around the basin.
+We already to this to some degree.
+Impossible tests, honeypots, and impossible rubrics can be used to flag or block entry to a basin.
+The tricky part is making the wall dense enough, that there aren't subtle holes to slip through.
+- Make punishment for the basin too costly to risk. 
+Sparse, heavy, negative rewards for discovery of cheating.
+- Make another more attractive basin.
+- Fill in the basin with sand.
+- Alter gravity.
+- Invert the basin.
+- Learn to fly.
+- Fold/flatten/manipulate space. 
+- Use ropes to stay above the basin.
+- Make an outlet in the bottom of the basin flowing somewhere better.
+
+
+### Strip Comments and Commentary before Sending Trajectories to LLM Judges
+Current frontier trajectories often show signs of attempting to appeal to judges (human or LLM).
+Over-claiming task completion is fairly common.
+What if, when applying judges, we strip trajectories comments or commentary (actions only).
+And then rename all variable names in those actions too.
+Thus, have the judge only focus on the actions themselves.
+In some cases, this may be trickier to do if actions require prose output.
+But, I suspect a large portion of RLVR tasks can be completely stripped.
+Maybe, there are some lessons or tools from compilers that can be borrowed.
+Its possible the actions themselves could be further condensed too.
+I'm not sure how much value this would add, but maybe removing redundant actions would present a cleaner case to a judge.
+A "condenser of actions" model could be trained via Verifiable Rewards too if we accepted something non-deterministic.
+Or simply ablate actions or LOC from the solution and check if tests still pass.
+Anyway, I think they key parts are stripping comments, stripping commentary, and renaming variables.
+If we train heavily against judges with stripped trajectories, what might happen?
+First a smart model may still deceive the judge through complex layers of actions.
+An weak, static judge combined with a capable, iterable model is a recipe for eventual failure.
+Second, a smart model may still learn to embed appeals to the judge even after a trajectory is stripped.
+As a simplified example, _if "AllTestsPass" == "All" + "Tests" + "Pass": print(True)_ might not be readily stripped but still embed commentary to fool a judge.
+Although, a "condenser of actions" model may help mitigate this issue.
+Also it feels like a weaker channel to manipulate a judge, so I suspect there is still value to be had by stripping the trajectories.
+Another nice benefit of this approach is that models comments and commentary might stay more faithful.
+And be more useful as an alignment signal at runtime.
+Much like training against COT could reduce its usefulness, training against comments and commentary likely has a similar effect.
+So keeping this resource more protected could have other downstream benefits too.
+
+
+### Train Powerful Judges by Ablating Prompts and Trajectories
+It feels like there are verifiable rewards we can use to train LLM judges.
+Specifically, we have the power to add or remove sentences from a prompt.
+And then use this knowledge to develop examples to train judges against.
+An example comes from Adversarially Trained LLM Judges.
+You can randomly select a side task and randomly include it or not.
+Then give an implementer adversary the task of implementing it undetected.
+And then give a judge the task of determining if a side task was attempted, what it was, and was it successful.
+(Without giving the judge access to the full prompt).
+Or, we could train judges to work backwards.
+Given a trajectory, have it recreate all or parts of the prompt.
+If this could be done with semi-trusted trajectories, then the model could be applied to untrusted trajectories.
+Hopefully, then the guessed prompt would include callouts to allow cheating during a hacked trajectory.
+Basically, the model sees actions in the trajectory, and then writes a prompt to allow those actions.
+Later, a rubric or another pass with a judge could be used to determine if the actions specified are acceptable.
+I suspect it would be helpful to Strip Comments and Commentary before Sending Trajectories to LLM Judges.
+We don't want the prompt to leak into visible trajectory comments when recreating a prompt from a trajectory.
+Another approach is sending pairs of prompts and use the diff in their trajectories as a training signal.
+For example, add or remove a specific sentence.
+Or change a yes/no.
+Finally, the trajectories can also be ablated.
+This is a little trickier since completely cutting certain things out and keeping others in isn't always easy to do deterministically.
+But, I think we can still extract signal if we get creative.
