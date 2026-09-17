@@ -921,5 +921,12 @@ I wonder if we could do something similar for aligning LLM's?
 Generating or thinking through hypothetical or scenario development and then updating on them.
 
 
-
-
+### How to avoid falling into the cheating basin of attraction?
+_This isn't a concrete proposal, more brainstorming via analogy. Feel free to skip_
+The idea here is that basic RL creates a basin of attraction around cheating.
+And if we were to modify this inevitable falling into the basin how might we do it?
+    Make another steeper basin
+_Learn the skills to feel the tug of that gradient and then avoid it._
+Even better yet, you can see that gradient or hole from a distance, not just when you're right on top of it.
+I'm not sure exactly how you might implement this.
+Maybe some sort of aggregation over multiple trajectories could identify a common cheatin
