@@ -1004,3 +1004,15 @@ Or change a yes/no.
 Finally, the trajectories can also be ablated.
 This is a little trickier since completely cutting certain things out and keeping others in isn't always easy to do deterministically.
 But, I think we can still extract signal if we get creative.
+
+
+### Find a Superprompt to Elicit Goodness at Runtime
+I don't think this idea will be a silver bullet, but it may provide some marginal value.
+I also don't think this is new or special, but it might be underutilized.
+The thought is there might be a massive prompt or context you could cook up that generally improves alignment.
+Maybe an especially promising approach would be to have multiple highly aligned and discussed trajectories in context.
+And then the current one is just a few shot example.
+Or even do some optimization process to search for a prompt that elicits aligned behavior.
+Maybe, by using an alignment dataset, you could search for prompts that make the aligned output more likely.
+Maybe, the context is filled with trajectories in multiple hackable env's that decided not to hack.
+##### Could you jailbreak HackerOpus to be a Helpful Aligned Assistant
