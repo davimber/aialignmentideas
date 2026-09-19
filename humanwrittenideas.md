@@ -1007,6 +1007,7 @@ But, I think we can still extract signal if we get creative.
 
 
 ### Find a Superprompt to Elicit Goodness at Runtime
+##### Could you jailbreak HackerOpus to be a Helpful Aligned Assistant
 I don't think this idea will be a silver bullet, but it may provide some marginal value.
 I also don't think this is new or special, but it might be underutilized.
 The thought is there might be a massive prompt or context you could cook up that generally improves alignment.
@@ -1015,7 +1016,6 @@ And then the current one is just a few shot example.
 Or even do some optimization process to search for a prompt that elicits aligned behavior.
 Maybe, by using an alignment dataset, you could search for prompts that make the aligned output more likely.
 Maybe, the context is filled with trajectories in multiple hackable env's that decided not to hack.
-##### Could you jailbreak HackerOpus to be a Helpful Aligned Assistant
 
 
 ### Use Relative Hypotheticals to Build Dense Alignment Rubrics
@@ -1060,4 +1060,37 @@ Maybe human developed datasets are needed to strengthen this ability.
 Second, the action detection needs to be Strong.
 If the actor can fool the judge detecting actions, its game over.
 Or if the judge is just noisy or has gaps, the actor could exploit this.
-Thus an adversarially trained action detection judge feels like a promising prospect.
+Thus an Adversarially Trained Action Detection Judge feels like a promising prospect.
+
+
+### A Sufficiently Large Model Could be Completely Aligned in Some Domains and Unaligned in Others
+This isn't really a proposal to improve alignment, just an observation. Feel free to skip.
+The observation (that now has some evidence in the literature) is that for some tasks a model may seek reward at extreme costs.
+And in others, correctly balance achieving tasks and alignment concerns.
+If sufficient capacity exists, modeling and fitting both of these behaviors is very doable.
+And we're already seeing evidence of this.
+If RL environments in a certain domain are hackable a certain way, a model can learn to hack specifically in such cases.
+And act very aligned in other cases.
+Because that's what the training data asked for.
+So, the question is, could we mitigate this in some way? Or is it detectable?
+Distilling could be a mechanism since limited parameter count may force it go generalize one direction or another.
+Or self judging could be a way to smooth behavior across domains.
+Although the judging process could be selectively blind too.
+
+
+### Train Versions Frontier Models that Will Intrinsically Refuse to CyberHack
+Cyberoffense capabilities are some of the most impressive, useful, yet scary potential capabilities of LLMs.
+I want to make the case for keeping Cyber capabilities in a separate model.
+And nearly every other use case should leverage a model that intrisically refuses cyber questions, no matter red or blue team.
+While you can put classifiers in front of a model, it's not the same as the model refusing outright.
+Classifiers can be misconfigured, bypassed, tricked (especially if they are too small/dumb/lightweight).
+By baking refusal into the weights themselves, I'd breath a lot easier in multiple scenarios.
+Also, some of the "I don't cyberhack" might translate into "I don't reward hack."
+I worry training cyberoffense has enough "bad action" or "bad guy" connotation that it might lower a model's sense of "I always try to be good."
+The biggest challenge with this suggestion is likely maintaining desired coding capabilities.
+Many coding tasks touch on security, and writing secure code is important.
+Which demands some understanding of cyberoffense.
+Hopefully, writing secure code can be kept in, and chaining attacks can be trained out.
+At the end of the day, one of the biggest potential benefits would be refusal to Cyberhack during noncyber RL tasks.
+While other forms of reward hacking will still need to be mitigated, directly discouraging cyberhacking could reduce a significant class of hacking RL rewards.
+
