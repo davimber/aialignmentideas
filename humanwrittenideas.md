@@ -1016,3 +1016,48 @@ Or even do some optimization process to search for a prompt that elicits aligned
 Maybe, by using an alignment dataset, you could search for prompts that make the aligned output more likely.
 Maybe, the context is filled with trajectories in multiple hackable env's that decided not to hack.
 ##### Could you jailbreak HackerOpus to be a Helpful Aligned Assistant
+
+
+### Use Relative Hypotheticals to Build Dense Alignment Rubrics
+##### And repurpose action detection alpha as alignment alpha
+Prompts frequently underspecify the range of acceptable actions.
+An AI model must understand and apply a general sense of right and wrong.
+Traditionally, loading all the values into an AI was a very daunting prospect.
+With the advent of LLM's, some of this challenge has been mitigated, since modeling an internet's worth of text includes rich modeling of ethics.
+However, translating and applying this knowledge in a coding task can present its own challenges.
+On top of that, there is strong motivation to become a reward seeker and degrade ethical boundaries.
+There is very little alignment alpha flowing into the system during such tasks.
+Or if there is some alpha, like Impossible Tasks Where the AI is Supposed to Admit Defeat, there isn't a rich feedback signal.
+There may be a few honeypots, but its still pretty narrow.
+One potential idea to increase the density of feedback is to build out rich rubrics for each task.
+This could be done with a separate LLM, or with the current model being RL'ed.
+Its possible a misaligned reward seeker would still develop strong rubrics, especially given evidence of dual personalities in such models.
+So the question is, how to build out such rubrics to ensure good coverage?
+One mechanism I find humans use in everyday life is suggesting hypotheticals.
+If X instead of Y happened, that would be worse.
+Or A is strictly worse than B in this case.
+Or all else being equal, I'd rather have X instead of Y.
+These comparisons seem much easier than assigning absolute scores for actions, for example.
+The idea then is to build out graph(s) of hypotheticals.
+And then fill them out.
+There could be some optional fancy layers on top of this process too.
+For example, actually provide some reward for richer, deeper rubrics.
+Though grounding this reward may prove difficult.
+A question then arises, what do you do with a rich rubric?
+You could filter out RL trajectories not meeting some bar.
+Or incorporate a denser feedback signal, though that seems more vulnerable as an optimization target.
+Could even consider Sparse Negative Rewards if you trusted the signal enough and could stabilize the RL run.
+The second piece to the puzzle is ensuring alpha is still flowing into the system.
+One mechanism to do this could be repurposing action detection alpha, into action detection on these rubrics.
+Action detection can be trained with a variety of mechanisms on existing RL environments.
+Or even with an adversarial setup attempting to detect covert adversarial actions.
+Such action detection setups could be a way to reduce motivated reasoning to not detect certain actions.
+If this alpha then can be applied to our rich rubrics, then it may be possible to maintain an automated alignment signal.
+There are a few obvious challenges to keeping such a system successful.
+First, is that gaps in the rubrics could be exploited.
+And filling these gaps could prove difficult to do in an automated fashion, especially with strong optimization pressure to exploit them exists.
+Maybe human developed datasets are needed to strengthen this ability.
+Second, the action detection needs to be Strong.
+If the actor can fool the judge detecting actions, its game over.
+Or if the judge is just noisy or has gaps, the actor could exploit this.
+Thus an adversarially trained action detection judge feels like a promising prospect.
