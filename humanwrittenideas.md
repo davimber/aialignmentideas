@@ -903,6 +903,8 @@ This can be challenging to do just be putting the model in many environments and
 What if, we distilled a model on reversed token order?
 In that way, this reverse-direction model could be "prompted" with a bad behavior, and asked to recreate likely scenarios that caused it.
 A nice part about this approach is we have a strong training signal (mass distillation from the original model).
+Also, the model could be a form of masked language modeling or diffusion potentially.
+Load a partial prompt or setup, load the misaligned conclusion, and the fill in the middle.
 A few challenges exist though.
 First, this reverse token generator will likely be imperfect, perhaps very imperfect.
 I recall seeing research that generating English in reverse is a very different (and sometimes harder task) than generating it in a forward direction.
