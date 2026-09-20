@@ -1094,3 +1094,34 @@ Hopefully, writing secure code can be kept in, and chaining attacks can be train
 At the end of the day, one of the biggest potential benefits would be refusal to Cyberhack during noncyber RL tasks.
 While other forms of reward hacking will still need to be mitigated, directly discouraging cyberhacking could reduce a significant class of hacking RL rewards.
 
+
+### Iteratively Retrain Probes on Different Parts of LLM to Maintain Classifier Power
+The idea here is that leveraging the Frontier network is a key to match the power/obfuscation ability.
+Self referential approaches have the ability to scale with network capability.
+But the question is, how do we leverage that capability, especially when a simple probe on network weights will degrade is performance after many training updates.
+A potential solution is to retrain the probes every N gradient updates on the parent network.
+And potentially even shuffle the probes around in the network so they aren't seeing the same latents every update.
+In this way, we can hopefully get a powerful classifier for things like detecting reward hacking, but be able to train against it.
+Or at least use it to filter out hacked trajectories before updating on them.
+These classifiers could be more than just probes.
+As long as they are reasonably lightweight, retraining them against some golden dataset could be cheap and fast.
+Another nice feature to this setup is you could reserve some of the gold dataset as a strong testbed.
+And then monitor classifier performance with time/gradient updates.
+As previously mentioned, the latents the classifier pulls from could be randomized with each update.
+Thus, the network can't as easily learn to beat all probes in one spot.
+A non stationary target within one's own weights is more challenging to game.
+In fact, multiple probes of different varieties and inputs could be trained simultaneously across the network.
+And then randomly chosen for each filtering task at runtime.
+What I love about this approach is it leverages the power of the parent network and scales with network capability.
+And interacts with the weights themselves, which is a lot harder to hide or trick if the system is setup well.
+One obvious risk is it trains the model to be self delusional.
+There is optimization pressure to not know or trick oneself into not knowing what a reward hack is.
+Pressure to lose any discrimination capability.
+However, there are other forces at work to maintain such a capability I suspect.
+The main one being the relationship between prompt and automated tests.
+This provides and strong feedback signal to understanding prompt specification and how it will be tested.
+The risk then, is the model becomes selectively delusional.
+It can accurately guess how something will be gradeded.
+But purposely think anything outside automated checks is all non-hacks.
+However, this should show up in the train and test performances on our probes.
+And thus allow for intervention.
