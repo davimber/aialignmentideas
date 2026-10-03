@@ -1224,3 +1224,28 @@ If optimization pressure wasn't put on this communication layer right away, it m
 For example, messages to self might carefully describe exact exploits, since the reward signal will likely reward that.
 (Assuming we've setup the system to only get rewards upon all tests passing in the second implementation).
 So, maybe its used prior to self distillation or at deployment time.
+
+
+### Inject flag tokens at train time on labeled hacks then monitor probabilities of these flags
+An observation is that most of the probability information an LLM predicts on each token is thrown away.
+What if we could better leverage those predictions, especially of the low likelihood tokens?
+One way to potentially do this is to reserve special tokens that can be used as flags or warning signs.
+During pretraining, or maybe midtraining, we could inject these flags into hacky content.
+Then during RL, we could monitor the probability of the model predicting this flag.
+If it goes above some threshold, maybe for some period of time, we could flag the rollout.
+Alternatively, we could inject them toward the end of post training.
+And then during deployment filter out runs with the flag at high enough probability.
+Obviously, you wouldn't want to show these flags to the user.
+So if they were selected, just filter them out or remove them from the selection options entirely.
+Different flags could be used for different things.
+For example, uncertain rewards could get one flag.
+Or others could correspond to specific types of behavior.
+Maybe positive self correction could have a flag too.
+When we inject these tokens, a question arises: where?
+Maybe at the end of a sentence or line could work.
+Random injections might work just fine though too.
+Although, this might increase entropy unduly.
+So, a patterned approach could be considered too?
+Every tenth token for example might decrease unnecessary entropy.
+Anyway, the long tail of probabilities and large vocabularies of LLM's today feel like an under-leveraged resource.
+Maybe this or other mechanisms could be used to increase oversight of the generation process.
