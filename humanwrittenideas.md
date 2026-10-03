@@ -1130,6 +1130,7 @@ And thus allow for intervention.
 
 
 ### Leverage solution momentum to keep from hacking
+##### Regularly inject self planning and self reviews to avoid hacking
 This idea is pretty straightforward to explain, but could be implemented a wide variety of ways.
 The observation is that LLM's and agents tend to finish what they are doing.
 If given a partial sentence, much of their training encourages finishing it.
@@ -1188,3 +1189,38 @@ The nice part about using inverting words or other sentence or language structur
 However, the steer itself might still be weaker, and thus you can't update as heavily against it.
 Or, like previously mentioned, you then need to update your steering mechanism on some cadence too as it gets trained away.
 Anyway, I think there are a lot more ways you could take this.
+
+
+### Frequently branch rollouts and use a variety of mechanisms to select the most promising branch
+This idea borrows some from previous points.
+The thought is that sometimes an LLM will start down a path, maybe due to sampling a more rare token by chance, that dictates future actions.
+This can be for the better or for the worse.
+We could potentially do frequent branching at key tokens and partial rollouts along each branch.
+Then setup selection mechanisms for more promising branches.
+To make this work, the selection mechanism has to have some signal.
+If it's just random, then its no better than sample individual trajectories.
+So, what might be the signal we leverage?
+It could be any variety of classifiers: probes, Jspace, NLA's, LORA's.
+Or maybe some simple statistics about token distributions in each short branch would have some signal.
+For example, would higher entropy branches tend to have more hacks or less hacks.
+Branches could be diff'ed in some way, and selected based on clusters or similarities.
+Maybe a Jev type architecture classifier could quickly assess and assign the most promising candidates.
+
+
+### Low bandwidth instructions to self on how to complete a task.
+##### An extension of the idea to use another implementer LLM
+The thought here is that after an agent successfully completes an objective, it could be tasked with prompting itself to complete the same objective.
+However, we take out the original prompt and make the self prompt+instructions very character limited.
+Then, maybe this self instructions would be more auditable, especially if the bandwidth was sized correctly.
+Alternatively, the model could tasked with self prompting without even first completing the task.
+Hopefully the first approach might make the model more monitor-able since it tries to concisely communicate do's and don'ts to itself.
+Obviously, if trained against for sufficient time, the model may learn subtle encodings that the monitor doesn't catch but itself knows.
+A potential solution to this is previously described as using a separate implementer LLM.
+Like previously mentioned, ideally this implementer would be a more trusted LLM, though it could be static or dynamic.
+Optionally, we could vary the character limit.
+This might make for trajectory diversity that could be useful in relative ranking groups of trajectories.
+Or, it could be useful for comparison simply to improve incrimination.
+If optimization pressure wasn't put on this communication layer right away, it might be very incriminating.
+For example, messages to self might carefully describe exact exploits, since the reward signal will likely reward that.
+(Assuming we've setup the system to only get rewards upon all tests passing in the second implementation).
+So, maybe its used prior to self distillation or at deployment time.
