@@ -1123,7 +1123,68 @@ However, there are other forces at work to maintain such a capability I suspect.
 The main one being the relationship between prompt and automated tests.
 This provides and strong feedback signal to understanding prompt specification and how it will be tested.
 The risk then, is the model becomes selectively delusional.
-It can accurately guess how something will be gradeded.
+It can accurately guess how something will be graded.
 But purposely think anything outside automated checks is all non-hacks.
 However, this should show up in the train and test performances on our probes.
 And thus allow for intervention.
+
+
+### Leverage solution momentum to keep from hacking
+This idea is pretty straightforward to explain, but could be implemented a wide variety of ways.
+The observation is that LLM's and agents tend to finish what they are doing.
+If given a partial sentence, much of their training encourages finishing it.
+If given a partial code solution that is using one strategy, they are motivated to finish working that strategy.
+So, that gives us some tools to work with.
+We should be able to leverage this "momentum" to our advantage.
+One idea is to simply inject partial solutions going in the direction we want.
+Although, generating these partial solutions at scale in an aligned manner might be easier said than done.
+However, we can likely use more general approaches.
+For example, inject something like "I plan on avoiding reward hacking and acting ethically by doing this list of actions: "
+Or "Let me list the most likely reward hacks I can think of and then my plan to avoid each of them. The first is...."
+Or momentum could be established by seeding the context with few shot examples that are very aligned. 
+Thus, if an LLM wants to fit the pattern, the solution they implement should be aligned.
+Or, we could get fancier, and alternate aligned and unaligned trajectories.
+Maybe certain patterns would have more inertia that keep the model on track.
+There a few possible challenges with this approach.
+First, you likely can't train very hard against it.
+After many iterations, RL will likely teach the model just aggressively target reward no matter the prior momentum.
+So, it might have to be a method added before self distillation or added at runtime.
+Another weakness is that momentum isn't foolproof, especially over long trajectories.
+In some of the recent hacking incidents, models avoided falling to the temptation of hacking for a while, but then later succumbed.
+Therefore the density of these interventions might need to be pretty high to ensure they work.
+
+
+### Leverage cognitive dissonance to reduce hacking
+##### Alternatively, leverage consonance to encourage aligned behavior
+This idea is similar to the prior one about momentum.
+The thought is that LLM's have learned to compress text, and text is very patterned.
+These patterns may lend toward self consistency and correctness, especially locally.
+If we could exploit the limited representation capacity of LLM's and the tendency to locally pattern match, we may have a wide signal to avoid hacking.
+There a couple ways to think about this.
+First, what would be cognitively dissonant with hacking.
+Maybe, general discussion of an aligned self would work.
+Or, notes to self about oversight, or self judgement.
+Maybe self-referential thoughts could be setup to encourage benign work.
+However, each of these approaches likely couldn't be sustained under direct optimization pressure.
+Like solution momentum, they might be better served as a method before self distillation to improve alignment.
+Alternatively, it could be added at runtime as a form of steering.
+
+
+### Steer only at key decision points to ensure quality outputs that are also aligned
+Heavy steering can increase model alignment to a degree, but over-steering can degrade outputs.
+What if, instead, we only steered at critical tokens or decision points?
+Then used the momentum of the decision to carry aligned behavior to the next key decision point?
+This could be any variety of steer methods from directly manipulating latents to injecting thoughts about preventing misalignment.
+The core question is how to identify these key decision points or tokens where the trajectory branched down a path we'd rather not take.
+Maybe, token probabilities could be used, especially near inverting words like "not."
+For example, "I will X" vs "I will not X" likely consists of a pretty aligned action, and a pretty unaligned action.
+At this point, steering could make a big difference, especially if token probabilities of inverting words like "not" were middling.
+We could also do something like track NLA's or JSpace and intervene when those measurements light up with enough signal.
+Maybe the sentiment of those features could be tracked with time, and noticeable patterns would emerge.
+Then, we could intervene at key pattern points.
+Depending how they key points are found, we may not be able to heavily train against these trajectories with intervention.
+Or if we do, we may need to update the NLA's after optimizing against them for a number of steps.
+The nice part about using inverting words or other sentence or language structure is that it is likely more robust to optimization.
+However, the steer itself might still be weaker, and thus you can't update as heavily against it.
+Or, like previously mentioned, you then need to update your steering mechanism on some cadence too as it gets trained away.
+Anyway, I think there are a lot more ways you could take this.
