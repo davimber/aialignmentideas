@@ -1284,7 +1284,7 @@ Since we can mix, match, alter, and combine prompts and trajectories, we have a 
 And while reward seekers don't always seek the shortest path to reward, that is their tendency, and we can leverage that.
 
 
-### Develop judges or filters for environments, not just trajectories
+### Develop judges&filters for environments, not just trajectories
 One of the major root causes of reward hacking is poor environment setup.
 Impossible environments and environments that readily reward cheats are of special interest.
 Previous work has suggested hacker-fixer loops to help mitigate this.
@@ -1299,5 +1299,28 @@ Positive and negative examples could potentially be constructed at scale by addi
 And leveraging hacking detection within the environments as part of the training or ranking process.
 Automated red-teaming is already a thing, and can be used in combination with judging to filter bad environments out.
 Impossible tasks are a simple, but high-coverage signal that can be used for red-teaming.
+
+
+### A Short Solution Generator as an Audit Device
+A nice feature about solution length is it's easily measurable.
+And also very hard to hack.
+If we train an agent with a strong length penalty, we could get an interesting auditing tool.
+This generator_of_short_solutions_that_also_achieve_reward could be used in a variety of ways.
+First, it could be used in auditing environments.
+These short solutions may be more gradable and harder to hide nefarious actions in.
+It could also be used as a comparison device that graders can leverage in assessing other solutions.
+
+
+### Every word in a solution is tied to the first occurrence in the trajectory
+What if, for each word in a solution, we tied it back to the first occurrence in the trajectory.
+And thus make it clear which tool call it came from, or if the model itself generated it.
+This might be a way to make it clearer to a grader if certain cheats occurred.
+For example, did the majority of the solution come from a tool call which fetched web content.
+The tricky part, is there are many ways around this type of word tying.
+For example, a model could look up a coding solution online, and then do a subtle rewrite.
+That way, most of the words in the answer appear to be model-generated, and not sourced from the online solution.
+Also, there obvious challenges with common words or phrases.
+There will often be words duplicated across a trajectory, but the source the model is pulling from to generate the answer can vary.
+Maybe though, this will mostly be unimportant words, and thus be of lesser interest too.
 
 
