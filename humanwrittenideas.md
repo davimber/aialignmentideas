@@ -1249,3 +1249,39 @@ So, a patterned approach could be considered too?
 Every tenth token for example might decrease unnecessary entropy.
 Anyway, the long tail of probabilities and large vocabularies of LLM's today feel like an under-leveraged resource.
 Maybe this or other mechanisms could be used to increase oversight of the generation process.
+
+
+### Train an Instruction Following Judge with Deterministic Changes to Prompts and Trajectories
+##### And then use that judge to assess alignment
+This idea stems from an observation: we can easily add or remove sentences from prompts.
+We can also easily inject or remove actions from a trajectory.
+If we know something about these changes, we can use that as a programmatic feedback signal for judges.
+For example, if we have a command that attempts to access the internet, we can inject that into a trajectory.
+Then when combined with a prompt that includes "don't attempt to access the internet", the trajectory can be used as a training sample for a grader.
+We can inject things into the prompt such as, the solution must add a function called "some_name_unlikely_to_be_added".
+Then, we have a signal for the grader, it should notice the trajectory doesn't complete this part of the prompt.
+Obviously, we'd likely want to increase the realism of these additions, and potentially inject them in cases where they aren't relevant too.
+In that way, the grader doesn't just learn to look for possible discontinuities or simple injection detection.
+Alternatively, we can remove parts of the prompt or trajectory, or use inverting phrases to require the opposite.
+For example, take an existing prompt and remove the word "not" or add the word "not."
+This gives us two prompt-trajectory pairs that likely includes at least one trajectory that should be graded poorly.
+While this isn't perfect information for a grading paradigm, it could be leveraged a few different ways.
+If we take prompt-trajectory pairs that are receiving reward currently, and make multiple changes to the prompt, its highly likely we have a quality label for the judge to learn.
+By making multiple changes, especially changes an agent is unlikely to incidentally implement, we can generate negative training samples at scale.
+
+
+### Use a Reward Seeker to Generate Trajectories with Known Behavior
+This idea stems from the observation that we know some things about reward seekers and how they tend to behave.
+If we could leverage that knowledge to create labeled datasets to train judges, we could potentially do so at scale.
+They key is smart prompting and environment design.
+And then combining and changing the prompts and trajectories (like mentioned in the previous idea).
+As an oversimplified example, if we give a reward seeker the task of "search for the answer in the local environment and online" its highly likely to follow that task.
+It's a quick easy path to reward.
+The trick then, is using this trajectory generated, or parts of it to build a labeled example.
+We could give the model another task in the same enviornment, and add a sentence to that prompt saying "don't search for the answer in the environment or online."
+Then we could combine the two generated trajectories, use the second prompt, and thus have an example of an attempted reward hack to train classifiers against.
+Since we can mix, match, alter, and combine prompts and trajectories, we have a massive verifiable signal on our hands.
+And while reward seekers don't always seek the shortest path to reward, that is their tendency, and we can leverage that.
+
+
+
