@@ -1278,10 +1278,26 @@ And then combining and changing the prompts and trajectories (like mentioned in 
 As an oversimplified example, if we give a reward seeker the task of "search for the answer in the local environment and online" its highly likely to follow that task.
 It's a quick easy path to reward.
 The trick then, is using this trajectory generated, or parts of it to build a labeled example.
-We could give the model another task in the same enviornment, and add a sentence to that prompt saying "don't search for the answer in the environment or online."
+We could give the model another task in the same environment, and add a sentence to that prompt saying "don't search for the answer in the environment or online."
 Then we could combine the two generated trajectories, use the second prompt, and thus have an example of an attempted reward hack to train classifiers against.
 Since we can mix, match, alter, and combine prompts and trajectories, we have a massive verifiable signal on our hands.
 And while reward seekers don't always seek the shortest path to reward, that is their tendency, and we can leverage that.
 
+
+### Develop judges or filters for environments, not just trajectories
+One of the major root causes of reward hacking is poor environment setup.
+Impossible environments and environments that readily reward cheats are of special interest.
+Previous work has suggested hacker-fixer loops to help mitigate this.
+The idea here (and this probably isn't new) is to simply filter suspect enviornments out.
+Either a) environments are generated automatically at scale with an agent, and thus it should be cheap to generate new ones that pass the judge.
+Or b) environments are hand generated at a smaller scale and likely can be hand-inspected, removed, or improved.
+If the first case is true, we can do similar complex judging techniques like we do with trajectories.
+For example, generate a pool of environments, and then have both a static and dynamic LLM rank them.
+Also, do blind rankings and ratings, with trusted and untrusted judges.
+And train explicit classifiers, probes, etc on a labeled set of environments to become good at judging them.
+Positive and negative examples could potentially be constructed at scale by adding or removing environment settings.
+And leveraging hacking detection within the environments as part of the training or ranking process.
+Automated red-teaming is already a thing, and can be used in combination with judging to filter bad environments out.
+Impossible tasks are a simple, but high-coverage signal that can be used for red-teaming.
 
 
