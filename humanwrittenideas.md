@@ -1324,3 +1324,24 @@ There will often be words duplicated across a trajectory, but the source the mod
 Maybe though, this will mostly be unimportant words, and thus be of lesser interest too.
 
 
+### Purposely train an Eval detector feature partway through the network
+Eval awareness and selective behaviors remain one of the scariest prospects for dealing with powerful AI's.
+As they become more situationally aware, they could behave well on tests, but the run rouge in the wild.
+Interpretability techniques are potentially a strong weapon to uncover such behavior.
+The thought goes: if the network is eval aware, that awareness should be detectable in some latent in the network.
+However, finding a single feature for eval awareness isn't always straightforward as superposition and redundancy can make interpretability more difficult.
+What if, instead, we purposely trained such a feature into the network.
+We have a massive labeled signal (production traffic and a host of evals) and could train the network to recognize each.
+As an example, we could train a set of neurons partway through the network to fire upon eval but not on prod traffic.
+This would force the network to develop detection machinery upstream from that layer.
+Then, we may be able to analyze how downstream layers leverage that information.
+At production deployment, then we have the option to flip those neurons or features.
+This could be used to measure difference in evals with the detector "on" or "off."
+Or, it could simply be set to eval for all traffic, and potentially improve alignment that way.
+There a couple possible challenges with the approach.
+First, if the network develops redundancy for this feature then simply turning one off may not change or remove the awareness.
+It would be important to do experiments to show flipping the switch actually drives differences in believe across the board.
+Second, it's possible training this capability out of the network entirely is a better approach then training it in and controlling it.
+Maybe, training it into the network increases the amount of other types of conditional behavior.
+Or fixing this feature at runtime causes some mental discord that negatively impacts model outputs.
+All in all, it's a promising idea to explicitly control one of the scariest elements in powerful AI agents.
