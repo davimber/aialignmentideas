@@ -1361,3 +1361,11 @@ However, since the grade is prepended, the model can learn to reason why the gra
 The nice part is, we can also include in the grade descriptions of possible reward hacks.
 Then at runtime, construct prompts or prepended "grades" to describe no hacking and successful rewards.
 So, the system can: get descriptive feedback, learn from both postive and negative reward cases, learn from hacked and unhacked cases, yet not be directly optimized to subvert hacking monitors.
+
+##### Text based rewards could optionally be done just for hacking detection. Run RL for rewards like normal.
+As an intermediate solution, we could experiment with still doing RL for rewards, but inject a token(s) that say if hack detectors went off or not.
+Like before, this would likely need to be injected with the prompt (not after the trajectory) so the model can learn to conditionalize answers based on it.
+Maybe the injection would need to be very small though (like a single token) to be closer to policy and stable RL though.
+Ideally the injection would be a detailed description about uncertainty around the hack detection, but maybe a single token increased training stability.
+At runtime, like before, we then prefill this token with "0" or "no hack" and rollout from there.
+
