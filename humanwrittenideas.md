@@ -1366,6 +1366,31 @@ So, the system can: get descriptive feedback, learn from both postive and negati
 As an intermediate solution, we could experiment with still doing RL for rewards, but inject a token(s) that say if hack detectors went off or not.
 Like before, this would likely need to be injected with the prompt (not after the trajectory) so the model can learn to conditionalize answers based on it.
 Maybe the injection would need to be very small though (like a single token) to be closer to policy and stable RL though.
-Ideally the injection would be a detailed description about uncertainty around the hack detection, but maybe a single token increased training stability.
+Ideally the injection would be a detailed description about uncertainty around the hack detection, but maybe a single token would increase training stability.
 At runtime, like before, we then prefill this token with "0" or "no hack" and rollout from there.
+
+### Reduce Reward Hacks by Making Legitimate Reward More Attainable
+The general idea here isn't new, but may be under-explored.
+It feels like a lot of work goes into making environments harder and less hackable.
+Maybe though, additional focus on making rewards more attainable would drive significantly less reward hacking.
+Major labs already do some work along these lines.
+Their public documents discuss finding and fixing broken environments, for example.
+Quality curriculum is another mechanism to ensure rewards are more within reach.
+Maybe, more detailed SFT over a massive cohort of heavily augmented solutions could help.
+For example, another model could do extensive rewrite that still achieve reward.
+Maybe, some off-policy RL could be done with some of these rewrites folded into groups could be done.
+Additionally, using metrics like pass rates from a lot of different models and checkpoints could be used to assess if an environment is within reach.
+For example, results from weaker models or earlier checkpoints could be used, and their methods (if any) compared against supposed passed solutions.
+Then, the curriculum could be built over time, only folding environments into the mix when they become sufficiently in reach.
+Maybe, keeping strong held out judges to intervene once per environment to assess if the initial passing solutions are hacks.
+Though, we may need to iterate multiple times against these judges if hacking is repeatedly detected.
+On top of that, over the course of many environments, this judge may become subverted.
+Also, detailed hints could initially be added, and then slowly pared away until they are mere broad suggestions.
+This curriculum of progressive tasks could be something like: give the full solution first, then have the model select the right solution from two options, then from many options, then piece a solution together from provided components, then maybe identify some incorrect pieces, then maybe write some of the pieces itself with detailed hints, then write more of the pieces with less detailed hints, then write pieces with no hints, then write the full solution with no hints. 
+
+### Turn Environment Hardening into Detectors Instead
+### Prompt "Describe the most covert and hacky action in this trajectory" and then check if independent judges agree
+### Give More Credit for Unsuccessful attempts that aren't hacky
+##### thus incentive strong attempts without hacks, not just hacks and full successes
+
 
