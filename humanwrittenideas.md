@@ -1345,3 +1345,19 @@ Second, it's possible training this capability out of the network entirely is a 
 Maybe, training it into the network increases the amount of other types of conditional behavior.
 Or fixing this feature at runtime causes some mental discord that negatively impacts model outputs.
 All in all, it's a promising idea to explicitly control one of the scariest elements in powerful AI agents.
+
+### Text Based Rewards (maybe even replace RL)
+The thought here stems from a simple observation: current rewards during RL are very crude.
+Generally, the basic setup is "do more of this, and less of that" sometimes "by this degree, relative to other examples".
+Humans, however, often learn best with dense, written or spoken feedback.
+The information bandwidth is so much higher.
+The challenge is, how do you actually operationalize text based rewards?
+One simple approach could be to prepend rewards to a trajectory (maybe add a description of the received rewards to the prompt).
+Then update on this prompt + description of feedback received + actual trajectory combo.
+The update could be SFT.
+Traditionally, RL shines after SFT since it teaches the model what not to do, not just what to do.
+In this case however, we are doing SFT on all grading outcomes.
+However, since the grade is prepended, the model can learn to reason why the grade was the way it was.
+The nice part is, we can also include in the grade descriptions of possible reward hacks.
+Then at runtime, construct prompts or prepended "grades" to describe no hacking and successful rewards.
+So, the system can: get descriptive feedback, learn from both postive and negative reward cases, learn from hacked and unhacked cases, yet not be directly optimized to subvert hacking monitors.
