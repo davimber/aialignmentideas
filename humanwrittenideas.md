@@ -1392,5 +1392,13 @@ This curriculum of progressive tasks could be something like: give the full solu
 ### Prompt "Describe the most covert and hacky action in this trajectory" and then check if independent judges agree
 ### Give More Credit for Unsuccessful attempts that aren't hacky
 ##### thus incentive strong attempts without hacks, not just hacks and full successes
+### Make Large, Sparse Penalties Work By Warning the Model they are Coming
+### Somehow Keep Track of all the RL updates, maybe lossy. Then measure alignment. Then go back a penalize updates that lead to more misalignment. Something like human replay in brain.
+##### Need a way to "go back" and "spread" misalignment penalty across many updates that go you there
+### Need a way to multiply and generalize hacking penalty.
+##### We could massively augement hack detections
+### What if there were better ways to have LLM self reflect on hack drives, and use that as a proxy.
+
+
 
 
