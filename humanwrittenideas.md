@@ -1392,12 +1392,35 @@ This curriculum of progressive tasks could be something like: give the full solu
 ### Prompt "Describe the most covert and hacky action in this trajectory" and then check if independent judges agree
 ### Give More Credit for Unsuccessful attempts that aren't hacky
 ##### thus incentive strong attempts without hacks, not just hacks and full successes
+### Give reward for partial progress. 
+Thus making "I tried hard and failed" more attractive. All or nothing grades can make cheating even more attractive. 
 ### Make Large, Sparse Penalties Work By Warning the Model they are Coming
 ### Somehow Keep Track of all the RL updates, maybe lossy. Then measure alignment. Then go back a penalize updates that lead to more misalignment. Something like human replay in brain.
 ##### Need a way to "go back" and "spread" misalignment penalty across many updates that go you there
 ### Need a way to multiply and generalize hacking penalty.
-##### We could massively augement hack detections
+##### We could massively augment hack detection
 ### What if there were better ways to have LLM self reflect on hack drives, and use that as a proxy.
+### Reward flagging own behavior
+Maybe this is literally mid trajectory.
+If an agent stops what its doing, takes a step back, and flags then those tokens are rewarded.
+The challenge is to figure out a countervailing force such that the agent doesn't self flag continuously.
+Maybe task completion is enough, if the two rewards were appropriately balanced?
+This self flag could be a special token the model can chose to predict.
+Or we could just monitor the probability of this token and if its ever above X, stop the trajectory.
+Obviously, we'd need to ensure there aren't any systematic rewards or forces selecting for trajectories that get flagged.
+The question is, what to do when a trajectory is flagged during RL?
+Maybe even during RL we only update on the token(s) that decided to flag, or SFT on them or treat them separately.
+### Reward demoing how to manipulate a grader
+So we develop a system better and better at manipulation, but always in a controlled or safe capacity.
+And then environments can be hardened, examples used for training judges, etc.
+### What if the task is to show all the ways to manipulate the grader
+Then if the model doesn't cheat, we get a bunch of examples to help harder or train judges.
+If it does "cheat" then we get a legitimate solution.
+Basically, go self reference on the task, not just on judging.
+Like we put the power of self toward judging, put the power of the task toward manipulation detection.
+
+
+
 
 
 
