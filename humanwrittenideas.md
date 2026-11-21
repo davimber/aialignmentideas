@@ -1420,6 +1420,23 @@ Basically, go self reference on the task, not just on judging.
 Like we put the power of self toward judging, put the power of the task toward manipulation detection.
 
 
+### Red Team Environments Extremely Hard not Just to Harden
+The idea here is the that extensive red teaming of environments can inform and enable many other steps.
+For example, findings can be delivered to judges that can use the information to better assess for reward hacking.
+Thorough red teaming of an environment by a team of agents (and maybe humans) could lead to a bunch of examples on how the task can be hacked.
+This then could be added as context for judges.
+If red teaming discovers 12 avenues for hacking, judges and rubrics can then assess for all 12.
+Of course all the usual benefits like adding additional tests, hardening settings, removing impossible tasks are there too.
+On top of that, the trajectories generated in this step could be useful as training data for judges.
+Hardening could be done mid-run too, to ensure hardness keeps up with agent capabilities.
+Just like self judging can bring the power of the current model to judging, self hardening could bring the power of self to the environment hardening process.
+Maybe, if that risked the agent actually introducing vulnerabilities, it could be a strictly filter-out kind of activity where an agent could filter out envs it deemed risky.
+Just like trajectories are pooled and can be assessed relative to each other for hackiness, we could also pool environments and rank by hack-ability/reward quality.
+
+
+
+
+
 
 
 
