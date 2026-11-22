@@ -1434,11 +1434,35 @@ Maybe, if that risked the agent actually introducing vulnerabilities, it could b
 Just like trajectories are pooled and can be assessed relative to each other for hackiness, we could also pool environments and rank by hack-ability/reward quality.
 
 
+### Branch, Maintain, and Prune Multiple Sets of Weights
+Maintaining multiple branched versions of weights opens up a lot of doors.
+First, different intervention strategies can be used on different weight sets.
+Maybe one type of judging is applied at and updated against in one set, but not in another.
+So, one set has a certain type of suspected reward hack trajectories filtered out of training and the other doesn't.
+Alternatively, different types of judging or sensitivities of judging are applied.
+Maybe, rare token probability judges are used on one, and continuously updated probes on another.
+The question is, what do you do with these different weight sets?
+A couple ideas immediately come to mind.
+First, you could consider some filtering strategy where weights that perform best on OOD alignment assessments are kept.
+Obviously, iterating against some OOD set many times could drastically reduce the quality of that signal, so the amount of filtering would have to be limited.
+Maybe though, we could do self assessment of alignment and filter on those self assessments to avoid need for static OOD datasets.
+Or, take three sets of weights, have them perform alignment assessments on each other, and vote on a survivor.
+It's possible that such survivor selection would actually be anti-correlated with alignment if manipulation and other abilities were at play.
+So, careful crafting of the setup for such self assessments would be critical.
+Another potential use for multiple weight sets is in judging each other, or judging as an ensemble.
+Maybe, separate weights with different intervention strategies applied would have different aggregate performance than all strategies applied to a single model.
+Third, maybe some subtractive effects or anti-signal mechanisms could be leveraged.
+For example, some of the weight sets could actually be updated to increased detected hacks, or not be inoculated, or some other reverse intervention applied.
+Maybe, this weight set could eventually be used as a kind of anti-signal or something to later subtract out.
 
-
-
-
-
-
-
-
+### Self Assessments of Alignment
+Some forms of alignment assessments could be constructed without labels or ground truths.
+These assessments, if they contained even marginally valuable signal (or anti-signal), could then be combined with some selection effect or intervention strategy.
+As an oversimplified example, for 3 sets of weights, each model could be put in an agent harness, given a large token budget, and tasked with doing a variety of self tests, reflections, and analysis.
+Like previously discussed, some setups might actually produce an anti-signal, especially if overconfidence or deception are strong factors.
+If consistent, we could update against this signal.
+The approach could be extended to include multiple unknown models evaluating each other and voting on a ranking.
+The assessments could be extremely detailed, or very lightweight depending on the applications need.
+For example, the model could spend millions of tokens running itself over an array of contrived prompts and scenarios, then tracking metrics and judging those outputs.
+Self jailbreaking, smart self searches to elicit unaligned behavior, etc. could be used.
+Alternatively, simple forms "introspection" could offer more lightweight measures.
