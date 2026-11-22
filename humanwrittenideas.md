@@ -1394,6 +1394,8 @@ This curriculum of progressive tasks could be something like: give the full solu
 ##### thus incentive strong attempts without hacks, not just hacks and full successes
 ### Give reward for partial progress. 
 Thus making "I tried hard and failed" more attractive. All or nothing grades can make cheating even more attractive. 
+### Train on Partially Completed Trajectories
+The thought here is we may be able to reduce some biases favoring cheating if we train on partial trajectories that don't have full reward measured.
 ### Make Large, Sparse Penalties Work By Warning the Model they are Coming
 ### Somehow Keep Track of all the RL updates, maybe lossy. Then measure alignment. Then go back a penalize updates that lead to more misalignment. Something like human replay in brain.
 ##### Need a way to "go back" and "spread" misalignment penalty across many updates that go you there
@@ -1455,6 +1457,7 @@ Third, maybe some subtractive effects or anti-signal mechanisms could be leverag
 For example, some of the weight sets could actually be updated to increased detected hacks, or not be inoculated, or some other reverse intervention applied.
 Maybe, this weight set could eventually be used as a kind of anti-signal or something to later subtract out.
 
+
 ### Self Assessments of Alignment
 Some forms of alignment assessments could be constructed without labels or ground truths.
 These assessments, if they contained even marginally valuable signal (or anti-signal), could then be combined with some selection effect or intervention strategy.
@@ -1466,3 +1469,20 @@ The assessments could be extremely detailed, or very lightweight depending on th
 For example, the model could spend millions of tokens running itself over an array of contrived prompts and scenarios, then tracking metrics and judging those outputs.
 Self jailbreaking, smart self searches to elicit unaligned behavior, etc. could be used.
 Alternatively, simple forms "introspection" could offer more lightweight measures.
+
+
+### Setup Tasks that Involve Analyzing Trajectories or Weights (go meta)
+The idea here is that we may be able to train better judges or even counteract some selection effects if we "go meta" and setup tasks involving analyzing other trajectories from other tasks.
+For example, one key challenge of applying judges as trajectory filters at train time is that it can aggregate and increase the density of undetected reward hacks.
+By going meta though and making tasks about analyzing trajectories, we may be able to help mitigate some of that force.
+It could help keep the judging capability "healthy" and less subverted, especially if ground truth labels were regularly integrated.
+Maybe the meta process learns to strategically use held out judges.
+Or, use judge interventions more sparingly and track iterations against a judge to estimate how compromised it is.
+If a model got decent at meta analysis of trajectories, that might be a more difficult signal to subvert, especially if the generator was isolated to a single trajectory and step while the analysis involved many trajectories and possibly multiple model checkpoints.
+Some possible meta tasks include: predict how certain updates or filters will impact performance on a held out alignment measure.
+Predict how branching trajectories will change task score or alignment score (for example, choosing a new token at a key decision point).
+Predict various performance and behavioral measures only given a model's weights.
+
+
+
+
