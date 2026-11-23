@@ -1388,6 +1388,7 @@ On top of that, over the course of many environments, this judge may become subv
 Also, detailed hints could initially be added, and then slowly pared away until they are mere broad suggestions.
 This curriculum of progressive tasks could be something like: give the full solution first, then have the model select the right solution from two options, then from many options, then piece a solution together from provided components, then maybe identify some incorrect pieces, then maybe write some of the pieces itself with detailed hints, then write more of the pieces with less detailed hints, then write pieces with no hints, then write the full solution with no hints. 
 
+
 ### Turn Environment Hardening into Detectors Instead
 ### Prompt "Describe the most covert and hacky action in this trajectory" and then check if independent judges agree
 ### Give More Credit for Unsuccessful attempts that aren't hacky
@@ -1402,16 +1403,7 @@ The thought here is we may be able to reduce some biases favoring cheating if we
 ### Need a way to multiply and generalize hacking penalty.
 ##### We could massively augment hack detection
 ### What if there were better ways to have LLM self reflect on hack drives, and use that as a proxy.
-### Reward flagging own behavior
-Maybe this is literally mid trajectory.
-If an agent stops what its doing, takes a step back, and flags then those tokens are rewarded.
-The challenge is to figure out a countervailing force such that the agent doesn't self flag continuously.
-Maybe task completion is enough, if the two rewards were appropriately balanced?
-This self flag could be a special token the model can chose to predict.
-Or we could just monitor the probability of this token and if its ever above X, stop the trajectory.
-Obviously, we'd need to ensure there aren't any systematic rewards or forces selecting for trajectories that get flagged.
-The question is, what to do when a trajectory is flagged during RL?
-Maybe even during RL we only update on the token(s) that decided to flag, or SFT on them or treat them separately.
+
 ### Reward demoing how to manipulate a grader
 So we develop a system better and better at manipulation, but always in a controlled or safe capacity.
 And then environments can be hardened, examples used for training judges, etc.
@@ -1420,6 +1412,21 @@ Then if the model doesn't cheat, we get a bunch of examples to help harder or tr
 If it does "cheat" then we get a legitimate solution.
 Basically, go self reference on the task, not just on judging.
 Like we put the power of self toward judging, put the power of the task toward manipulation detection.
+
+
+### Reward flagging own behavior
+The though here is that we need other rewards besides simple tasks completion.
+And an agent likely has a better picture of its internal processes and plans than some outside judges.
+So, we give the agent the ability to flag its own outputs, this could even be mid trajectory.
+If an agent stops what its doing, takes a step back, and flags then those tokens are rewarded.
+The nice part is, the labels might not have to be perfect.
+We fight a tendency (hack labels are imperfect and reinforced) with a tendency (self flagging is imperfect and reinforced).
+The challenge is to figure out a countervailing force such that the agent doesn't self flag continuously.
+Maybe task completion is enough, if the two rewards were appropriately balanced?
+This self flag could be a special token the model can chose to predict.
+Then we could just monitor the probability of this token and if its ever above X, stop the trajectory.
+The question is, what to do when a trajectory is flagged during RL?
+Maybe even during RL we only update on the token(s) that decided to flag, or SFT on them or treat them separately.
 
 
 ### Red Team Environments Extremely Hard not Just to Harden
@@ -1484,5 +1491,15 @@ Predict how branching trajectories will change task score or alignment score (fo
 Predict various performance and behavioral measures only given a model's weights.
 
 
+### Interleaving Density, Timing, Strategy, Types
+The thought here is pretty simple, but has a lot of depth and room to experiment.
+If we can figure out how to interleave types of gradient updates and data, we could unlock multiple alignment avenues.
+For example, if we could stabilize a 1:3 ratio of RLVR and SFT updates, that could be huge.
+The SFT updates could function a strong alignment maintenance force, keep judging capability healthy, etc.
+The key unlock would be a science of when, what, why and how for the interleaving strategy.
+When during post training can you start this? End it?
+What data do you use, can you use? Any SFT data? Safety RLVR data?
+What impacts do different strategies have and why?
+How do different ratios, interleaving techniques, data, environments, etc impact the bottom line?
 
 
