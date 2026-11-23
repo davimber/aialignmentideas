@@ -1390,6 +1390,18 @@ This curriculum of progressive tasks could be something like: give the full solu
 
 
 ### Turn Environment Hardening into Detectors Instead
+The thought here is that simply hardening an environment to prevent certain actions throws away information that could be valuable.
+While not all hardening methods could be turned into detectors, some could.
+By adding tripwires that we can monitor and record when touched, we can track more metrics about hacking tendencies and drives.
+These metrics could be used in a wide variety of downstream applications: training other judges, evaluating intervention methods, evaluating midtraining impacts, etc.
+So, if we can flag any outbound internet traffic instead of outright block it for example, that could be a useful signal.
+In some cases, flagging might be harder than outright preventing certain actions as it may open up avenues for work-arounds.
+Maybe, tripwires and hard blocks could be used in combination in some scenarios.
+Also, some types of tripwires might be more detectable an influence model behavior.
+So training against these detectors could have some negative side effects and would need to be monitored carefully.
+Using them as another alignment metric, however, could drive value with less risk.
+
+
 ### Prompt "Describe the most covert and hacky action in this trajectory" and then check if independent judges agree
 ### Give More Credit for Unsuccessful attempts that aren't hacky
 ##### thus incentive strong attempts without hacks, not just hacks and full successes
