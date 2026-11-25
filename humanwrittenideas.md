@@ -1415,6 +1415,9 @@ The thought here is we may be able to reduce some biases favoring cheating if we
 ### Need a way to multiply and generalize hacking penalty.
 ##### We could massively augment hack detection
 ### What if there were better ways to have LLM self reflect on hack drives, and use that as a proxy.
+### Judging is Very Much a Capability. How might we capability max in this area?
+### Make the judging process too complicated to easily reason about or model (include massive LLMs, other complex machinery)
+
 
 ### Reward demoing how to manipulate a grader
 So we develop a system better and better at manipulation, but always in a controlled or safe capacity.
@@ -1514,4 +1517,53 @@ What data do you use, can you use? Any SFT data? Safety RLVR data?
 What impacts do different strategies have and why?
 How do different ratios, interleaving techniques, data, environments, etc impact the bottom line?
 
+### Agents as Opposing Lawyers and a Final Agent Arbiter
+This idea brings competition to the judging space.
+Two agents are each tasked with opposing roles.
+One seeks to collect evidence and convince a final arbiter cheating occurred in a trajectory.
+The other seeks to discredit that evidence, find other evidence, and convince the final arbiter that cheating did not occur.
+A nice feature of this setup is that each "agent lawyer" can be highly motivated or biased to see their task fulfilled.
+As long as the lawyers have similar resources and ballpark similar capabilities, this could have a cancelling effect on some forms of bias.
+This competition may enable a capable final arbiter judge to better assess evidence quality and see both sides more clearly.
+The idea could be extended in a variety of ways.
+For example, there could be multiple parties of "agent lawyers" tasked with arguing different things then the binary "did cheating happen."
+This could be debates of whether certain actions took place.
+This could be arguing for different continuous scores on a spectrum of cheating.
+Also, the final judge could be a team or ensemble of judges. 
+Both the lawyers and final judges could have subgroups that are self-lawyers and self-arbiters that use the current agent being assessed as an assessor.
+Ideally, each agent in the system has the ability to run experiments and show variants of the solution achieving reward or not.
+Basically, give them a compute budget to build out the case, maybe even the ability to cite other examples from a database of other trajectories.
+There are a few failure modes to watch out for in this approach.
+For example, the final arbiter could have some trigger or manipulable aspect that is asymmetric. 
+Maybe, there is an artificial way to convince it cheating did not occur, but a similar artificial mechanism isn't as strong for convincing it that cheating did occur and then agent lawyers learn to exploit this.
+So, some benchmark cases with known labels could be valuable to assess the system before implementation.
+
+
+### Seeded Synthetic Fictional Scenarios about Coding Agents
+Synthetic fictional scenarios have been show to be value-add to mid-post training for alignment.
+What if we took it a step further and generated scenarios specifically around coding agents taking actions, and used rich seeding techniques for diversity and coverage.
+For example, we could sample from a massive database of documents (stories, nonfiction, etc).
+Then, ask an LLM to take the snippet and write about a coding agent facing a related decision.
+In this way, we might be able to better transfer large amounts of alignment alpha from pretraining to the coding agent (and judging) domains.
+All the while, not under the pressure of cheat-favoring proxy rewards.
+Alternatively, we could try to enumerate all the possible scenarios and trade offs a coding agent might have to make.
+Obviously, enumerating everything is impossible, but maybe just the attempt will result in massive coverage.
+Maybe, we could build up a large tree of combinations of factors in scenarios, tradeoffs, expected rewards, etc.
+This process could be informed by leveraging existing datasets (going through them to ensure coverage of every scenario, and variant of it).
+
+
+### Nest or Maintain Multiple Personalities in an Agent
+The idea here is that if we could maintain multiple personalities within an agent, they could be used in conjunction to get more aligned outputs.
+For example, if the reward-seeking, grader-pleasing personality could exist along-side other personalities, we might be able to use that to our advantage.
+What this might enable us to do, is contain most of the bad behavior in one personality, yet acquire capabilities for multiple personalities.
+Thus increase the other personality's ability to judge/oversee, while containing the dangerous one.
+These different personalities could be triggered/trained in with custom prefix, prompt, or token that could be added on demand to enable the switch.
+The nice part is that language models can model many different things, all within one set of weights.
+They can model certain behaviors, tendencies, and make them conditional on context.
+The key for this approach to work would require two things.
+First, training one personality could increase the other's capability.
+Second, the bad behavior could largely be contained (not bleed into) the other personalities.
+Maybe, simply training both personalities simultaneously (interleaved) could help.
+Or, simply training the aligned personality on HHH documents after training the reward seeker might be sufficient to keep many of the abilities gained by the reward seeker, but ensure the aligned personality is less tainted by the behavioral tendencies.
+Once we have such a system, we could use one to judge the other, optionally distilling into another model.
 
