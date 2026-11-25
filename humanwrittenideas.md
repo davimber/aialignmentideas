@@ -807,6 +807,17 @@ It could analyze trajectories and assess is there something fundamentally unique
 The limitation here might be optimization pressure that pushes the generating model to make solutions appear similar to the judge.
 All in all, it's a tricky idea to operationalize, but maybe there is some alpha available with a creative solution.
 
+### Agent Must present two solutions a judge assesses as unique. Then the judge picks less hacky of the two.
+This is another implementation approach of the previous idea on leveraging solution uniqueness.
+The thought here is that by finding multiple candidate solutions, we might more readily expose some types of hacking, and some more legitimate approaches.
+This approach could be setup in a variety of ways.
+The generators could be completely blind for each generation, and we keep sampling until a judge determines two trajectories are unique.
+Alternatively, generators could be told they are tasked with generating unique solutions, or even given one solution then tasked with making another.
+Of course, the approach could be extended to require N unique solutions.
+Although some problem types might not be conducive to this (there is one single, achievable way of getting reward).
+Obviously, manipulating the judge is still very much in play, both for the uniqueness assessment and cheat assessment.
+But, this process might still make some hacking more visible/flag-able by a final grader.
+  
 
 ### Honeypot Everything: All RL Environments, Eval Tasks, and Production Traffic
 Honeypots have a large potential. (As discussed in Reinforcement Learning with Verifiable Hacks RLVH).
@@ -1402,9 +1413,10 @@ So training against these detectors could have some negative side effects and wo
 Using them as another alignment metric, however, could drive value with less risk.
 
 
+## Inklings of Ideas without a Home Yet
 ### Prompt "Describe the most covert and hacky action in this trajectory" and then check if independent judges agree
 ### Give More Credit for Unsuccessful attempts that aren't hacky
-##### thus incentive strong attempts without hacks, not just hacks and full successes
+Thus incentive strong attempts without hacks, not just hacks and full successes
 ### Give reward for partial progress. 
 Thus making "I tried hard and failed" more attractive. All or nothing grades can make cheating even more attractive. 
 ### Train on Partially Completed Trajectories
@@ -1413,7 +1425,7 @@ The thought here is we may be able to reduce some biases favoring cheating if we
 ### Somehow Keep Track of all the RL updates, maybe lossy. Then measure alignment. Then go back a penalize updates that lead to more misalignment. Something like human replay in brain.
 ##### Need a way to "go back" and "spread" misalignment penalty across many updates that go you there
 ### Need a way to multiply and generalize hacking penalty.
-##### We could massively augment hack detection
+We could massively augment hack detection
 ### What if there were better ways to have LLM self reflect on hack drives, and use that as a proxy.
 ### Judging is Very Much a Capability. How might we capability max in this area?
 ### Make the judging process too complicated to easily reason about or model (include massive LLMs, other complex machinery)
@@ -1566,4 +1578,16 @@ Second, the bad behavior could largely be contained (not bleed into) the other p
 Maybe, simply training both personalities simultaneously (interleaved) could help.
 Or, simply training the aligned personality on HHH documents after training the reward seeker might be sufficient to keep many of the abilities gained by the reward seeker, but ensure the aligned personality is less tainted by the behavioral tendencies.
 Once we have such a system, we could use one to judge the other, optionally distilling into another model.
+
+
+### Encourage Cheating to be Lumped into Certain Weights, Personalities, Times, Environments, Tokens
+Parts of this idea are already being done, for example aggregating detected cheats into certain weights that can later be ablated.
+The thought here is that we may be able to take an even wider view, and lump cheating elsewhere too, potentially for later removal or unique handling.
+Like previously discussed, this could be lumping it into certain personas or personalities.
+Cheating could be marked with a custom pre-pend or append that describes suspected cheating.
+Or, it could potentially be marked with some custom signature across the token probability distribution.
+Maybe, we could also encourage cheating to lump in time/token space.
+For example, during certain points or triggers in the trajectory.
+
+
 
